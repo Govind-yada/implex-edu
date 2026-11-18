@@ -1,0 +1,277 @@
+{
+  "info": {
+    "name": "Implex Edu API Collection",
+    "description": "Production REST API Collection for Implex Edu MERN Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Student",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alex Morgan\",\n  \"email\": \"alex@student.edu\",\n  \"password\": \"Password123!\",\n  \"role\": \"student\",\n  \"gradeLevel\": \"Grade 11 - STEM\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Register Teacher",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Emily Watson\",\n  \"email\": \"emily@teacher.edu\",\n  \"password\": \"Password123!\",\n  \"role\": \"teacher\",\n  \"department\": \"Physics\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@implexedu.com\",\n  \"password\": \"Admin@Implex2026!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "Get Current User Profile (Me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth", "logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quizzes",
+      "item": [
+        {
+          "name": "Get All Quizzes",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/quizzes", "host": ["{{baseUrl}}"], "path": ["quizzes"] }
+          }
+        },
+        {
+          "name": "Create Quiz (Teacher / Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Quantum Mechanics Fundamentals\",\n  \"category\": \"Science & Technology\",\n  \"durationMinutes\": 15,\n  \"passingPercentage\": 60,\n  \"questions\": [\n    {\n      \"questionText\": \"What is the speed of light in vacuum?\",\n      \"options\": [\n        { \"text\": \"300,000 km/s\" },\n        { \"text\": \"150,000 km/s\" },\n        { \"text\": \"450,000 km/s\" },\n        { \"text\": \"200,000 km/s\" }\n      ],\n      \"correctOptionIndex\": 0,\n      \"marks\": 1,\n      \"explanation\": \"Light speed c is approximately 299,792 km/s.\"\n    }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/quizzes", "host": ["{{baseUrl}}"], "path": ["quizzes"] }
+          }
+        },
+        {
+          "name": "Start Quiz Attempt (Student)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/quizzes/QUIZ_ID_HERE/start", "host": ["{{baseUrl}}"], "path": ["quizzes", "QUIZ_ID_HERE", "start"] }
+          }
+        },
+        {
+          "name": "Submit Quiz Attempt (Student)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attemptId\": \"ATTEMPT_ID_HERE\",\n  \"answers\": {\n    \"QUESTION_ID_HERE\": 0\n  }\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/quizzes/QUIZ_ID_HERE/submit", "host": ["{{baseUrl}}"], "path": ["quizzes", "QUIZ_ID_HERE", "submit"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Competitions",
+      "item": [
+        {
+          "name": "List Competitions",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/competitions", "host": ["{{baseUrl}}"], "path": ["competitions"] }
+          }
+        },
+        {
+          "name": "Register For Competition",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teamName\": \"Apex Scholars\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/competitions/COMP_ID_HERE/register", "host": ["{{baseUrl}}"], "path": ["competitions", "COMP_ID_HERE", "register"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Certificates",
+      "item": [
+        {
+          "name": "Verify Certificate (Public)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/certificates/verify/CERT-IMP-DEMO-2026", "host": ["{{baseUrl}}"], "path": ["certificates", "verify", "CERT-IMP-DEMO-2026"] }
+          }
+        },
+        {
+          "name": "Get My Certificates",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/certificates/my-certificates", "host": ["{{baseUrl}}"], "path": ["certificates", "my-certificates"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact & Enquiries",
+      "item": [
+        {
+          "name": "Submit Public Contact Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarah Jenkins\",\n  \"email\": \"sarah@school.edu\",\n  \"phone\": \"+1 555-4321\",\n  \"subject\": \"Partnership Inquiry\",\n  \"message\": \"We would like to connect our high school students to your quiz leagues.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/contact", "host": ["{{baseUrl}}"], "path": ["contact"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super Admin Console",
+      "item": [
+        {
+          "name": "Get Admin Overview Stats",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/overview", "host": ["{{baseUrl}}"], "path": ["admin", "overview"] }
+          }
+        },
+        {
+          "name": "Get All Users (Filtered)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/users?role=student", "host": ["{{baseUrl}}"], "path": ["admin", "users"] }
+          }
+        },
+        {
+          "name": "Update User Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/admin/users/USER_ID_HERE/status", "host": ["{{baseUrl}}"], "path": ["admin", "users", "USER_ID_HERE", "status"] }
+          }
+        },
+        {
+          "name": "Get Platform Settings",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/settings", "host": ["{{baseUrl}}"], "path": ["admin", "settings"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Courses & Catalogs",
+      "item": [
+        {
+          "name": "Get All Courses (List-A to List-H)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/courses", "host": ["{{baseUrl}}"], "path": ["courses"] }
+          }
+        },
+        {
+          "name": "Get Courses Filtered (e.g. PCM / Hindi / List-B)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/courses?category=special_intermediate&medium=Hindi&listCategory=List-B",
+              "host": ["{{baseUrl}}"],
+              "path": ["courses"],
+              "query": [
+                { "key": "category", "value": "special_intermediate" },
+                { "key": "medium", "value": "Hindi" },
+                { "key": "listCategory", "value": "List-B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Organization Legal Info (TAN / PAN)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/courses/org/info", "host": ["{{baseUrl}}"], "path": ["courses", "org", "info"] }
+          }
+        },
+        {
+          "name": "Get Course By Code",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/courses/INT-11-PCM-IIT-EN", "host": ["{{baseUrl}}"], "path": ["courses", "INT-11-PCM-IIT-EN"] }
+          }
+        }
+      ]
+    }
+  ]
+}
