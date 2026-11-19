@@ -18,23 +18,13 @@ import {
   Zap,
   Calendar,
   Sparkles,
-  Atom,
-  Dna,
-  Stethoscope,
-  Calculator,
-  Medal,
-  Scale,
-  TrendingUp,
-  Cpu,
-  Layers,
-  Compass,
-  CheckCircle2,
 } from 'lucide-react';
 
 const bannerSlides = [
   {
     id: 'upsc',
     category: 'UPSC',
+    image: '/images/banners/upsc.jpg',
     title: 'UPSC Civil Services (IAS / IPS / IFS)',
     subtitle: 'Comprehensive GS Prelims + Mains, CSAT & Mock League',
     description:
@@ -44,11 +34,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#0d1435] to-[#12102e]',
     accentColor: 'text-amber-300',
     glowColor: 'rgba(99, 102, 241, 0.4)',
-    crestIcon: Landmark,
-    secondaryIcon: Scale,
-    subBadge1: 'IAS • IPS • IFS',
-    subBadge2: 'GS Prelims + Mains',
-    hubTitle: 'Civil Services Academy',
+    icon: Landmark,
     target: 'Graduates & Final-Year',
     duration: '12-Mo Track • 600+ Hrs',
     curriculum: 'GS (Pre+Mains) • CSAT',
@@ -61,6 +47,7 @@ const bannerSlides = [
   {
     id: 'ssc',
     category: 'SSC',
+    image: '/images/banners/ssc.jpg',
     title: 'SSC CGL, CHSL, MTS & CPO Masterclass',
     subtitle: 'Tier-1 & Tier-2 Quant, Reasoning, English & General Awareness',
     description:
@@ -70,11 +57,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#081e36] to-[#0a2540]',
     accentColor: 'text-sky-300',
     glowColor: 'rgba(14, 165, 233, 0.4)',
-    crestIcon: Target,
-    secondaryIcon: TrendingUp,
-    subBadge1: 'CGL • CHSL • MTS',
-    subBadge2: 'Speed Calculation Drills',
-    hubTitle: 'Central Careers Hub',
+    icon: Target,
     target: '10th / 12th & Graduates',
     duration: '6-Mo Target • 400+ Hrs',
     curriculum: 'Quant, Reasoning, English, GK',
@@ -87,6 +70,7 @@ const bannerSlides = [
   {
     id: 'school',
     category: 'School',
+    image: '/images/banners/school.jpg',
     title: 'School Education Foundation (5th–10th)',
     subtitle: 'Concept-First Mathematics, Science & Olympiad Problem Solving',
     description:
@@ -96,11 +80,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#082619] to-[#0a2e1e]',
     accentColor: 'text-emerald-300',
     glowColor: 'rgba(16, 185, 129, 0.4)',
-    crestIcon: School,
-    secondaryIcon: Atom,
-    subBadge1: 'Class 5th to 10th',
-    subBadge2: 'CBSE & ICSE Core',
-    hubTitle: 'Foundations Academy',
+    icon: School,
     target: 'Class 5th to 10th (CBSE/ICSE)',
     duration: 'Annual Batch • 6 Days/Wk',
     curriculum: 'NCERT Core & Mental Math',
@@ -113,6 +93,7 @@ const bannerSlides = [
   {
     id: 'college',
     category: 'College',
+    image: '/images/banners/college.jpg',
     title: 'College & University Degree Nourishment',
     subtitle: 'Undergraduate Sciences, Commerce, Arts & Placement Aptitude',
     description:
@@ -122,11 +103,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#0a232b] to-[#0e2c36]',
     accentColor: 'text-cyan-300',
     glowColor: 'rgba(6, 182, 212, 0.4)',
-    crestIcon: GraduationCap,
-    secondaryIcon: Layers,
-    subBadge1: 'B.Sc • B.Com • B.A',
-    subBadge2: 'Semester & Aptitude Track',
-    hubTitle: 'University Degree Hub',
+    icon: GraduationCap,
     target: 'B.Sc / B.Com / B.A Scholars',
     duration: 'Semester Track • 250+ Hrs',
     curriculum: 'Higher Sciences & Accounting',
@@ -139,6 +116,7 @@ const bannerSlides = [
   {
     id: 'competition',
     category: 'Competition',
+    image: '/images/banners/competition.jpg',
     title: 'Edu-Competition & State PCS (BPSC)',
     subtitle: 'State Civil Services, Teacher Eligibility & Central Vacancies',
     description:
@@ -148,11 +126,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#26190a] to-[#2e1d0c]',
     accentColor: 'text-amber-300',
     glowColor: 'rgba(245, 158, 11, 0.4)',
-    crestIcon: Award,
-    secondaryIcon: Compass,
-    subBadge1: 'BPSC & State PCS',
-    subBadge2: '15 Yrs Solved Papers',
-    hubTitle: 'Administrative League',
+    icon: Award,
     target: 'Graduates & TET Candidates',
     duration: '8-Mo Batch • 500+ Hours',
     curriculum: 'State GK, Polity & Science',
@@ -165,6 +139,7 @@ const bannerSlides = [
   {
     id: 'iit',
     category: 'IIT',
+    image: '/images/banners/iit.jpg',
     title: 'IIT-JEE (Main & Advanced Integrated)',
     subtitle: 'Premier Engineering Coaching & Multi-Concept Problem Solving',
     description:
@@ -174,11 +149,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#0a183d] to-[#0d1f4d]',
     accentColor: 'text-amber-400',
     glowColor: 'rgba(59, 130, 246, 0.4)',
-    crestIcon: Atom,
-    secondaryIcon: Sparkles,
-    subBadge1: 'JEE Main & Advanced',
-    subBadge2: 'NTA Computerized CBT',
-    hubTitle: 'Engineering Track',
+    icon: Sparkles,
     target: '11th, 12th & Dropper PCM',
     duration: '2-Yr / 1-Yr Fastrack • 750+ Hrs',
     curriculum: 'Physics, Chemistry & Math',
@@ -191,6 +162,7 @@ const bannerSlides = [
   {
     id: 'neet',
     category: 'NEET',
+    image: '/images/banners/neet.jpg',
     title: 'NEET-UG Medical Entrance Preparation',
     subtitle: '100% NCERT Line-by-Line Biology, High-Yield Chemistry & Physics',
     description:
@@ -200,11 +172,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#2d0c15] to-[#380e1a]',
     accentColor: 'text-rose-300',
     glowColor: 'rgba(244, 63, 94, 0.4)',
-    crestIcon: Stethoscope,
-    secondaryIcon: Dna,
-    subBadge1: 'NEET-UG Medical',
-    subBadge2: '100% NCERT Biology',
-    hubTitle: 'Medical Science Wing',
+    icon: ShieldCheck,
     target: '11th, 12th & Dropper PCB',
     duration: '1-Yr / 2-Yr Track • 800+ Hrs',
     curriculum: 'Botany, Zoology, Chem & Physics',
@@ -217,6 +185,7 @@ const bannerSlides = [
   {
     id: 'banking',
     category: 'Banking',
+    image: '/images/banners/banking.jpg',
     title: 'Banking Sector (IBPS PO/Clerk, SBI & RBI)',
     subtitle: 'Vedic Math Speed Drills, Reasoning & Financial Awareness',
     description:
@@ -226,11 +195,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#281c08] to-[#33220a]',
     accentColor: 'text-yellow-300',
     glowColor: 'rgba(234, 179, 8, 0.4)',
-    crestIcon: Calculator,
-    secondaryIcon: TrendingUp,
-    subBadge1: 'IBPS PO • SBI • RBI',
-    subBadge2: 'Vedic Math Drills',
-    hubTitle: 'Banking & Finance Hub',
+    icon: Landmark,
     target: 'Graduates in Any Discipline',
     duration: '4-Mo Speed Track • 300+ Hrs',
     curriculum: 'Vedic Math, DI & Banking GK',
@@ -243,6 +208,7 @@ const bannerSlides = [
   {
     id: 'boards',
     category: 'State Boards',
+    image: '/images/banners/boards.jpg',
     title: 'State Boards (Bihar BSEB & MP MPBSE)',
     subtitle: '10th Matric & 12th Inter Blueprint Modules (Hi/En Medium)',
     description:
@@ -252,11 +218,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#240c36] to-[#2c0e42]',
     accentColor: 'text-purple-300',
     glowColor: 'rgba(168, 85, 247, 0.4)',
-    crestIcon: Medal,
-    secondaryIcon: BookOpen,
-    subBadge1: 'Bihar & MP Boards',
-    subBadge2: 'Blueprint Model Papers',
-    hubTitle: 'Board Toppers Track',
+    icon: BookOpen,
     target: '10th & 12th Board Candidates',
     duration: 'Full Academic Year Batch',
     curriculum: 'Board Blueprint & Objective Bank',
@@ -269,6 +231,7 @@ const bannerSlides = [
   {
     id: 'tech',
     category: 'Tech & Skills',
+    image: '/images/banners/tech.jpg',
     title: 'Technology, Full-Stack & AI Skills',
     subtitle: 'Web Development, Python Programming & Verified Credentials',
     description:
@@ -278,11 +241,7 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#1e0d3b] to-[#27104d]',
     accentColor: 'text-fuchsia-300',
     glowColor: 'rgba(139, 92, 246, 0.4)',
-    crestIcon: Code,
-    secondaryIcon: Cpu,
-    subBadge1: 'Full-Stack Web & AI',
-    subBadge2: 'React • Node • Python',
-    hubTitle: 'Career Accelerator',
+    icon: Code,
     target: 'Students & Career Starters',
     duration: '6-Mo Career Track • 200+ Hrs',
     curriculum: 'React, Node, Python & AI Tools',
@@ -305,7 +264,7 @@ export default function ExamBannerCarousel() {
   const slideCount = bannerSlides.length;
   const SLIDE_DURATION = 4500; // Continuous 4.5s auto-scroll cycle
 
-  // 1. Continuous Auto-Scrolling Engine (Always active, never freezes)
+  // 1. Continuous Auto-Scrolling Engine (Always active)
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setDirection(1);
@@ -374,8 +333,7 @@ export default function ExamBannerCarousel() {
   };
 
   const currentSlide = bannerSlides[currentIndex];
-  const CrestIcon = currentSlide.crestIcon;
-  const SecondaryIcon = currentSlide.secondaryIcon;
+  const SlideIcon = currentSlide.icon;
 
   const handleCardClick = () => {
     navigate(currentSlide.ctaLink);
@@ -433,7 +391,7 @@ export default function ExamBannerCarousel() {
         })}
       </div>
 
-      {/* Main Animated Carousel Card (Authentic Vector Visualizer + Text - ZERO AI Images) */}
+      {/* Main Animated Carousel Card (Half-Photo + Half-Text with Real Human Photography) */}
       <div
         onClick={handleCardClick}
         onTouchStart={handleTouchStart}
@@ -472,78 +430,50 @@ export default function ExamBannerCarousel() {
             />
             <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-brand-500/20 rounded-full blur-2xl pointer-events-none" />
 
-            {/* Split Grid: Vector Crest Visualizer (Left) + Half Text & Specs (Right) */}
+            {/* Split Grid: Real Photo (Left) + Half Text & Specs (Right) */}
             <div className="relative z-10 flex flex-col md:flex-row items-stretch min-h-[340px] sm:min-h-[320px]">
-              {/* LEFT HALF: Pure Vector Graphic Crest Hub (Zero AI Generated Images) */}
-              <div className="w-full md:w-5/12 lg:w-[44%] relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-7 shrink-0 min-h-[190px] sm:min-h-[220px] md:min-h-full bg-slate-950/40 select-none">
-                {/* Background Vector Orbital Rings & Pattern */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30">
-                  <div className="w-56 h-56 rounded-full border border-white/20 border-dashed animate-spin-slow" />
-                  <div className="absolute w-40 h-40 rounded-full border border-white/25" />
-                </div>
-
-                {/* Ambient Center Glow */}
-                <div
-                  className="absolute w-36 h-36 rounded-full blur-2xl opacity-60 pointer-events-none"
-                  style={{ backgroundColor: currentSlide.glowColor }}
+              {/* LEFT HALF: Real Human Photography / Educational Image */}
+              <div className="w-full md:w-5/12 lg:w-[46%] relative overflow-hidden flex items-center justify-center shrink-0 min-h-[180px] sm:min-h-[220px] md:min-h-full bg-slate-950">
+                <img
+                  src={currentSlide.image}
+                  alt={`${currentSlide.title} Educational Photo`}
+                  className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-500 ease-out"
+                  loading="lazy"
                 />
 
-                {/* Central Embossed Category Crest Card */}
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  {/* Floating Pill Top */}
-                  <motion.div
-                    initial={{ y: -6, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.3 }}
-                    className="mb-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/12 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-extrabold text-white shadow-xs"
+                {/* Subtle Right Gradient Vignette on Desktop to seamlessly blend into dark card */}
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-950/85 pointer-events-none" />
+                {/* Subtle Bottom Gradient Vignette on Mobile */}
+                <div className="block md:hidden absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
+
+                {/* Mobile Top Overlaid Badges */}
+                <div className="md:hidden absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5 z-10">
+                  <span
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border backdrop-blur-md shadow-sm ${currentSlide.badgeColor}`}
                   >
-                    <SecondaryIcon className="w-3.5 h-3.5 text-amber-300" />
-                    <span>{currentSlide.subBadge1}</span>
-                  </motion.div>
+                    <SlideIcon className="w-3 h-3" />
+                    <span>{currentSlide.badge}</span>
+                  </span>
 
-                  {/* Primary Category Icon Frame */}
-                  <motion.div
-                    whileHover={{ scale: 1.06, rotate: 3 }}
-                    className="w-20 h-20 sm:w-22 sm:h-22 rounded-3xl bg-gradient-to-tr from-white/20 via-white/10 to-transparent backdrop-blur-xl border border-white/30 flex items-center justify-center shadow-2xl relative group-hover:border-amber-300/60 transition-all duration-300 ring-4 ring-white/10"
-                  >
-                    <CrestIcon className="w-10 h-10 sm:w-11 sm:h-11 text-amber-300 drop-shadow-md" />
-
-                    {/* Orbiting Sparkle */}
-                    <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-brand-500/40 border border-brand-300/80 flex items-center justify-center backdrop-blur-md">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-200" />
-                    </div>
-                  </motion.div>
-
-                  {/* Category Hub Title */}
-                  <h4 className="mt-3 text-xs sm:text-sm font-black tracking-wider uppercase text-white drop-shadow-xs">
-                    {currentSlide.hubTitle}
-                  </h4>
-
-                  {/* Floating Pill Bottom */}
-                  <motion.div
-                    initial={{ y: 6, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.15, duration: 0.3 }}
-                    className="mt-2 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-[10px] font-bold text-emerald-300 shadow-2xs"
-                  >
-                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                    <span>{currentSlide.subBadge2}</span>
-                  </motion.div>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[9px] tracking-wide shadow-xs animate-pulse">
+                    <Tag className="w-2.5 h-2.5" />
+                    <span>30% OFF</span>
+                  </span>
                 </div>
 
-                {/* Diagonal / Vertical Luminous Neon Light Beam */}
+                {/* Diagonal / Vertical Luminous Neon Light Beam (Matching Image 2) */}
                 <div className="hidden md:block absolute -top-8 -bottom-8 right-0 w-[2px] bg-gradient-to-b from-transparent via-white/80 to-transparent shadow-[0_0_16px_rgba(255,255,255,0.7)] pointer-events-none z-20" />
               </div>
 
               {/* RIGHT HALF: Title, Subtitle, Description & 4 Spec Badges */}
-              <div className="w-full md:w-7/12 lg:w-[56%] p-4 sm:p-5 lg:p-6.5 flex flex-col justify-between relative z-10">
+              <div className="w-full md:w-7/12 lg:w-[54%] p-4 sm:p-5 lg:p-6.5 flex flex-col justify-between relative z-10">
                 <div className="space-y-2">
                   {/* Desktop Header Badges */}
                   <div className="hidden md:flex flex-wrap items-center gap-2">
                     <span
                       className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border backdrop-blur-md ${currentSlide.badgeColor}`}
                     >
-                      <CrestIcon className="w-3.5 h-3.5" />
+                      <SlideIcon className="w-3.5 h-3.5" />
                       <span>{currentSlide.badge}</span>
                     </span>
 
