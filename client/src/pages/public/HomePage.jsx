@@ -172,6 +172,16 @@ export default function HomePage() {
               Discover new opportunities, strengthen your knowledge and move closer to your academic and career goals with Implex Edu.
             </motion.p>
 
+            {/* DYNAMIC ACADEMIC & COMPETITIVE EXAM BANNERS (Compact Length & Width) */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="my-5 w-full"
+            >
+              <ExamBannerCarousel />
+            </motion.div>
+
             {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -234,29 +244,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* FEATURED ACADEMIC & COMPETITIVE EXAM BANNERS */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="space-y-2"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-1.5">
-          <Badge variant="blue" className="bg-brand-50 text-brand-700 border-brand-200">
-            Admissions & Academic Batches 2026–27
-          </Badge>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-            Explore Academic & Competitive Programs
-          </h2>
-          <p className="text-xs text-slate-500 max-w-xl mx-auto">
-            Choose your preparation pathway — UPSC, SSC, School, College, IIT, NEET & more. Click any banner to access full syllabus.
-          </p>
-        </div>
-
-        <ExamBannerCarousel />
-      </motion.section>
 
       {/* 2. INSTITUTIONAL TIERS (Schools, Colleges, Universities) */}
       <motion.section
