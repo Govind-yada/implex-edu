@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 
@@ -68,29 +68,40 @@ const testimonialsData = [
 export default function TestimonialCarousel() {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef(null);
 
-  // Group into pairs of 2 on medium screens, 3 on large screens, or 1 on mobile
-  // We'll show an active index with a sliding window
   const total = testimonialsData.length;
+  const ROTATE_INTERVAL = 5000;
 
   useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
+    timerRef.current = setInterval(() => {
       setDirection(1);
       setPage((prev) => (prev + 1) % total);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isPaused, total]);
+    }, ROTATE_INTERVAL);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [total, page]);
+
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setDirection(1);
+      setPage((prev) => (prev + 1) % total);
+    }, ROTATE_INTERVAL);
+  };
 
   const handleNext = () => {
     setDirection(1);
     setPage((prev) => (prev + 1) % total);
+    resetTimer();
   };
 
   const handlePrev = () => {
     setDirection(-1);
     setPage((prev) => (prev - 1 + total) % total);
+    resetTimer();
   };
 
   // Get current active items (show 3 on desktop, 2 on tablet, 1 on mobile)
@@ -105,12 +116,8 @@ export default function TestimonialCarousel() {
   const visibleItems = getVisibleItems();
 
   return (
-    <div
-      className="space-y-8 select-none"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div className="flex items-center justify-between mb-4">
+    <div className="space-y-6 select-none">
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className="text-xs font-bold text-slate-500">
             Showing verified reviews ({page + 1} of {total})
@@ -119,93 +126,84 @@ export default function TestimonialCarousel() {
 
         <div className="flex items-center gap-2">
           <button
-            type="button"
             onClick={handlePrev}
-            aria-label="Previous testimonial"
-            className="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex items-center justify-center shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            aria-label="Previous testimonials"
+            className="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center text-slate-700 shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
-            type="button"
             onClick={handleNext}
-            aria-label="Next testimonial"
-            className="w-9 h-9 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex items-center justify-center shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            aria-label="Next testimonials"
+            className="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center text-slate-700 shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Testimonials Grid / Carousel */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={page}
-          initial={{ opacity: 0, x: direction * 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: direction * -20 }}
-          transition={{ duration: 0.35, ease: 'easeInOut' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {visibleItems.map((t, idx) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AnimatePresence mode="popLayout" initial={false}>
+          {visibleItems.map((item, idx) => (
             <motion.div
-              key={`${t.name}-${idx}`}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card hover:shadow-xl hover:border-brand-300 flex flex-col justify-between transition-all duration-300 relative group"
+              key={`${item.name}-${page}-${idx}`}
+              initial={{ opacity: 0, y: direction > 0 ? 20 : -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: direction > 0 ? -20 : 20 }}
+              transition={{ duration: 0.35, ease: 'easeOut', delay: idx * 0.05 }}
+              className={`bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-subtle flex flex-col justify-between hover-lift transition-all relative ${
+                idx === 2 ? 'hidden lg:flex' : idx === 1 ? 'hidden md:flex' : 'flex'
+              }`}
             >
               <div>
-                {/* Rating & Quote Icon */}
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-1">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <Quote className="w-5 h-5 text-slate-300 group-hover:text-brand-500 transition-colors" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-brand-50 text-brand-700 border border-brand-100">
+                    <CheckCircle2 className="w-3 h-3 text-brand-600" />
+                    {item.badge}
+                  </span>
                 </div>
 
-                {/* Quote Text */}
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic mb-6">
-                  "{t.quote}"
+                <Quote className="w-7 h-7 text-brand-200 mb-2 rotate-180" />
+
+                <p className="text-slate-700 text-sm leading-relaxed italic mb-6">
+                  "{item.quote}"
                 </p>
               </div>
 
-              {/* Author Info */}
               <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
                 <div
-                  className={`w-10 h-10 rounded-full ${t.avatarBg} text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs`}
+                  className={`w-10 h-10 rounded-full ${item.avatarBg} text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0`}
                 >
-                  {t.avatar}
+                  {item.avatar}
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1">
-                    <h4 className="text-xs font-extrabold text-slate-900 truncate">{t.name}</h4>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" title="Verified Scholar" />
-                  </div>
-                  <p className="text-[11px] text-slate-500 truncate">{t.role}</p>
-                  <span className="inline-block mt-0.5 text-[10px] font-bold text-brand-700 bg-brand-50 px-1.5 py-0.5 rounded">
-                    {t.badge}
-                  </span>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 leading-none">{item.name}</h4>
+                  <p className="text-xs text-slate-500 font-medium mt-1 leading-none">{item.role}</p>
                 </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
 
-      {/* Pagination Dot Indicators */}
+      {/* Progress Dots */}
       <div className="flex items-center justify-center gap-1.5 pt-2">
         {testimonialsData.map((_, idx) => (
           <button
             key={idx}
-            type="button"
             onClick={() => {
               setDirection(idx > page ? 1 : -1);
               setPage(idx);
+              resetTimer();
             }}
             aria-label={`Go to testimonial ${idx + 1}`}
             className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-              idx === page ? 'w-6 bg-brand-600 shadow-sm' : 'w-2 bg-slate-300 hover:bg-slate-400'
+              idx === page ? 'w-6 bg-brand-600 shadow-xs' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
             }`}
           />
         ))}

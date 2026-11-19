@@ -18,7 +18,6 @@ import {
   Zap,
   Calendar,
   Sparkles,
-  ExternalLink,
 } from 'lucide-react';
 
 const bannerSlides = [
@@ -35,7 +34,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#0d1435] to-[#12102e]',
     accentColor: 'text-amber-300',
     glowColor: 'rgba(99, 102, 241, 0.35)',
-    neonColor: 'from-indigo-400/80 via-amber-300/60 to-transparent',
     icon: Landmark,
     target: 'Graduates & Final-Year',
     duration: '12-Mo Track • 600+ Hrs',
@@ -59,7 +57,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#081e36] to-[#0a2540]',
     accentColor: 'text-sky-300',
     glowColor: 'rgba(14, 165, 233, 0.35)',
-    neonColor: 'from-sky-400/80 via-cyan-300/60 to-transparent',
     icon: Target,
     target: '10th / 12th & Graduates',
     duration: '6-Mo Target • 400+ Hrs',
@@ -83,7 +80,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#082619] to-[#0a2e1e]',
     accentColor: 'text-emerald-300',
     glowColor: 'rgba(16, 185, 129, 0.35)',
-    neonColor: 'from-emerald-400/80 via-amber-300/60 to-transparent',
     icon: School,
     target: 'Class 5th to 10th (CBSE/ICSE)',
     duration: 'Annual Batch • 6 Days/Wk',
@@ -107,7 +103,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#0a232b] to-[#0e2c36]',
     accentColor: 'text-cyan-300',
     glowColor: 'rgba(6, 182, 212, 0.35)',
-    neonColor: 'from-cyan-400/80 via-teal-300/60 to-transparent',
     icon: GraduationCap,
     target: 'B.Sc / B.Com / B.A Scholars',
     duration: 'Semester Track • 250+ Hrs',
@@ -131,7 +126,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#26190a] to-[#2e1d0c]',
     accentColor: 'text-amber-300',
     glowColor: 'rgba(245, 158, 11, 0.35)',
-    neonColor: 'from-amber-400/80 via-yellow-300/60 to-transparent',
     icon: Award,
     target: 'Graduates & TET Candidates',
     duration: '8-Mo Batch • 500+ Hours',
@@ -155,7 +149,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#0a183d] to-[#0d1f4d]',
     accentColor: 'text-amber-400',
     glowColor: 'rgba(59, 130, 246, 0.35)',
-    neonColor: 'from-blue-400/80 via-cyan-300/60 to-transparent',
     icon: Sparkles,
     target: '11th, 12th & Dropper PCM',
     duration: '2-Yr / 1-Yr Fastrack • 750+ Hrs',
@@ -179,7 +172,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#2d0c15] to-[#380e1a]',
     accentColor: 'text-rose-300',
     glowColor: 'rgba(244, 63, 94, 0.35)',
-    neonColor: 'from-rose-400/80 via-pink-300/60 to-transparent',
     icon: ShieldCheck,
     target: '11th, 12th & Dropper PCB',
     duration: '1-Yr / 2-Yr Track • 800+ Hrs',
@@ -203,7 +195,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#281c08] to-[#33220a]',
     accentColor: 'text-yellow-300',
     glowColor: 'rgba(234, 179, 8, 0.35)',
-    neonColor: 'from-amber-400/80 via-yellow-300/60 to-transparent',
     icon: Landmark,
     target: 'Graduates in Any Discipline',
     duration: '4-Mo Speed Track • 300+ Hrs',
@@ -227,7 +218,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#240c36] to-[#2c0e42]',
     accentColor: 'text-purple-300',
     glowColor: 'rgba(168, 85, 247, 0.35)',
-    neonColor: 'from-purple-400/80 via-fuchsia-300/60 to-transparent',
     icon: BookOpen,
     target: '10th & 12th Board Candidates',
     duration: 'Full Academic Year Batch',
@@ -251,7 +241,6 @@ const bannerSlides = [
     gradient: 'from-slate-950 via-[#1e0d3b] to-[#27104d]',
     accentColor: 'text-fuchsia-300',
     glowColor: 'rgba(139, 92, 246, 0.35)',
-    neonColor: 'from-violet-400/80 via-fuchsia-300/60 to-transparent',
     icon: Code,
     target: 'Students & Career Starters',
     duration: '6-Mo Career Track • 200+ Hrs',
@@ -267,16 +256,16 @@ const bannerSlides = [
 export default function ExamBannerCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef(null);
+  const touchStartX = useRef(null);
+  const pillRefs = useRef([]);
   const navigate = useNavigate();
 
   const slideCount = bannerSlides.length;
-  const SLIDE_DURATION = 6000; // 6s per slide
+  const SLIDE_DURATION = 4500; // Continuous 4.5s auto-scroll cycle
 
+  // 1. Continuous Auto-Scrolling Engine (Always active, never freezes)
   useEffect(() => {
-    if (isPaused) return;
-
     timerRef.current = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % slideCount);
@@ -285,23 +274,62 @@ export default function ExamBannerCarousel() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPaused, slideCount, currentIndex]);
+  }, [slideCount, currentIndex]);
+
+  // 2. Auto-scroll category pills bar so the active pill stays centered
+  useEffect(() => {
+    if (pillRefs.current[currentIndex]) {
+      pillRefs.current[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+  }, [currentIndex]);
+
+  const resetAutoTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % slideCount);
+    }, SLIDE_DURATION);
+  };
 
   const goToSlide = (index) => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
+    resetAutoTimer();
   };
 
   const handleNext = (e) => {
     if (e) e.stopPropagation();
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % slideCount);
+    resetAutoTimer();
   };
 
   const handlePrev = (e) => {
     if (e) e.stopPropagation();
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + slideCount) % slideCount);
+    resetAutoTimer();
+  };
+
+  // Touch Swipe Support for mobile devices
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (diff > 45) {
+      handleNext();
+    } else if (diff < -45) {
+      handlePrev();
+    }
+    touchStartX.current = null;
   };
 
   const currentSlide = bannerSlides[currentIndex];
@@ -338,18 +366,17 @@ export default function ExamBannerCarousel() {
     <div
       className="relative w-full max-w-5xl mx-auto px-2 sm:px-4 select-none"
       aria-label="Competitive Exam Programs Carousel"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Category Pills Navigation (Compact, mobile horizontal scroll with smooth indicators) */}
-      <div className="mb-3 flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-none px-1">
+      {/* Category Pills Navigation (Auto-scrolls with the active category) */}
+      <div className="mb-3 flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-none px-1 scroll-smooth">
         {bannerSlides.map((slide, idx) => {
           const isActive = idx === currentIndex;
           return (
             <button
               key={slide.id}
+              ref={(el) => (pillRefs.current[idx] = el)}
               onClick={() => goToSlide(idx)}
-              className={`px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+              className={`px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all duration-300 cursor-pointer flex items-center gap-1.5 shrink-0 ${
                 isActive
                   ? 'bg-slate-900 text-white shadow-md scale-102 ring-2 ring-brand-500/60'
                   : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/90 shadow-2xs'
@@ -364,20 +391,22 @@ export default function ExamBannerCarousel() {
         })}
       </div>
 
-      {/* Main Animated Carousel Card (Half-Pic + Half-Text Layout Matching Image 2) */}
+      {/* Main Animated Carousel Card (Half-Pic + Half-Text with Continuous Auto-Scroll) */}
       <div
         onClick={handleCardClick}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         className="group relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-700/80 cursor-pointer transition-all duration-300 hover:shadow-brand-500/25 hover:border-brand-500/60"
         title={`Click to view full course syllabus for ${currentSlide.title}`}
       >
-        {/* Animated Progress Bar */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 z-30">
+        {/* Animated Progress Bar (Visually tracks the auto-scrolling cycle) */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 z-30 overflow-hidden">
           <motion.div
             key={currentIndex}
             initial={{ width: '0%' }}
-            animate={{ width: isPaused ? '100%' : '100%' }}
+            animate={{ width: '100%' }}
             transition={{
-              duration: isPaused ? 0 : SLIDE_DURATION / 1000,
+              duration: SLIDE_DURATION / 1000,
               ease: 'linear',
             }}
             className="h-full bg-gradient-to-r from-brand-400 via-amber-300 to-emerald-400 shadow-sm"
@@ -412,7 +441,7 @@ export default function ExamBannerCarousel() {
                   loading="lazy"
                 />
 
-                {/* Subtle Right Gradient Vignette on Desktop to seamlessly blend into text card */}
+                {/* Subtle Right Gradient Vignette on Desktop */}
                 <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-950/80 pointer-events-none" />
                 {/* Subtle Bottom Gradient Vignette on Mobile */}
                 <div className="block md:hidden absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
@@ -432,11 +461,11 @@ export default function ExamBannerCarousel() {
                   </span>
                 </div>
 
-                {/* Diagonal / Vertical Luminous Neon Light Beam (Matching Image 2) */}
+                {/* Diagonal / Vertical Luminous Neon Light Beam */}
                 <div className="hidden md:block absolute -top-8 -bottom-8 right-0 w-[2px] bg-gradient-to-b from-transparent via-white/80 to-transparent shadow-[0_0_16px_rgba(255,255,255,0.7)] pointer-events-none z-20" />
               </div>
 
-              {/* RIGHT HALF: Title, Subtitle, Description & 4 Spec Badges (Matching Image 2) */}
+              {/* RIGHT HALF: Title, Subtitle, Description & 4 Spec Badges */}
               <div className="w-full md:w-7/12 lg:w-[54%] p-4 sm:p-5 lg:p-6.5 flex flex-col justify-between relative z-10">
                 <div className="space-y-2">
                   {/* Desktop Header Badges */}
@@ -453,7 +482,7 @@ export default function ExamBannerCarousel() {
                       <span>{currentSlide.offerTag}</span>
                     </span>
 
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 text-slate-300 text-[10px] font-medium">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 text-slate-300 text-[10px] font-medium">
                       <Calendar className="w-3 h-3 text-brand-300" />
                       <span>Session 2026–27</span>
                     </span>
@@ -474,7 +503,7 @@ export default function ExamBannerCarousel() {
                     {currentSlide.description}
                   </p>
 
-                  {/* 4 Spec Badges (2x2 Grid exactly as depicted in Image 2) */}
+                  {/* 4 Spec Badges (2x2 Grid Matching Image 2) */}
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     {/* Badge 1: Target */}
                     <div className="flex items-center gap-2 p-2 sm:p-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-xs">
@@ -585,8 +614,8 @@ export default function ExamBannerCarousel() {
       {/* Pagination Dot Indicators & Status */}
       <div className="mt-2 flex items-center justify-between px-1">
         <div className="text-[10px] font-medium text-slate-500 hidden sm:flex items-center gap-1.5">
-          <Zap className="w-3 h-3 text-amber-500" />
-          <span>Interactive Half-Preview • Tap any card to open syllabus</span>
+          <Zap className="w-3 h-3 text-amber-500 animate-pulse" />
+          <span>Auto-rotating continuously • Swipe or tap to explore</span>
         </div>
 
         <div className="flex items-center justify-center gap-1 mx-auto sm:mx-0">
