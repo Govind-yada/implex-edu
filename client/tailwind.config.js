@@ -39,13 +39,23 @@ export default {
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 3s ease-in-out infinite',
+        'float': 'float 3.5s ease-in-out infinite',
+        'shimmer': 'shimmer 2.5s linear infinite',
+        'glow-pulse': 'glow 2.5s ease-in-out infinite alternate',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-6px)' },
-        }
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        glow: {
+          '0%': { boxShadow: '0 0 15px rgba(37, 99, 235, 0.2)' },
+          '100%': { boxShadow: '0 0 30px rgba(99, 102, 241, 0.45)' },
+        },
       }
     },
   },

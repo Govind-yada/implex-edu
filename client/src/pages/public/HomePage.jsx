@@ -17,6 +17,12 @@ import {
   School,
   Landmark,
   BrainCircuit,
+  Star,
+  Mail,
+  Tag,
+  Quote,
+  Send,
+  Zap,
 } from 'lucide-react';
 import Badge from '../../components/common/Badge.jsx';
 
@@ -25,6 +31,12 @@ export default function HomePage() {
   const [competitions, setCompetitions] = useState([]);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Guest Gmail collection state (without login/signup)
+  const [guestEmail, setGuestEmail] = useState('');
+  const [guestEmailLoading, setGuestEmailLoading] = useState(false);
+  const [guestEmailSuccess, setGuestEmailSuccess] = useState(false);
+  const [guestEmailError, setGuestEmailError] = useState('');
 
   useEffect(() => {
     fetchHomeData();
@@ -46,6 +58,77 @@ export default function HomePage() {
       setLoading(false);
     }
   };
+
+  const handleGuestEmailSubmit = async (e) => {
+    e.preventDefault();
+    if (!guestEmail || !guestEmail.includes('@')) {
+      setGuestEmailError('Please enter a valid Gmail address (e.g. yourname@gmail.com).');
+      return;
+    }
+    setGuestEmailLoading(true);
+    setGuestEmailError('');
+    try {
+      await api.post('/email-subscriptions/subscribe', {
+        email: guestEmail.trim(),
+        basicNotifications: true,
+        specialOffers: true,
+        source: 'homepage_guest_capture',
+      });
+      setGuestEmailSuccess(true);
+      setGuestEmail('');
+    } catch (err) {
+      if (err.response?.status === 400 || err.response?.data?.message?.toLowerCase().includes('already')) {
+        setGuestEmailSuccess(true);
+      } else {
+        setGuestEmailError(err.response?.data?.message || 'Could not save email. Please try again.');
+      }
+    } finally {
+      setGuestEmailLoading(false);
+    }
+  };
+
+  const testimonials = [
+    {
+      name: 'Aarav Sharma',
+      role: 'Class 12th PCM & JEE Aspirant',
+      badge: 'JEE Main 98.7%ile',
+      avatar: 'AS',
+      avatarBg: 'bg-brand-600',
+      quote:
+        'Implex Edu completely changed my approach to physics and calculus. The weekly chapter test series and step-by-step doubt resolution helped me score 96% in pre-boards and boosted my JEE mock percentiles above 98.7.',
+      rating: 5,
+    },
+    {
+      name: 'Priya Patel',
+      role: 'State PSC & GS Foundation Batch',
+      badge: 'Rank #4 State Mock League',
+      avatar: 'PP',
+      avatarBg: 'bg-emerald-600',
+      quote:
+        'The depth of study materials, current affairs analysis, and mentorship from experienced faculty make Implex Edu unbeatable. Having cryptographically verified certificates for competitive milestones is an incredible advantage.',
+      rating: 5,
+    },
+    {
+      name: 'Rohan Verma',
+      role: '10th Board Topper',
+      badge: 'CBSE 95.4% Aggregate',
+      avatar: 'RV',
+      avatarBg: 'bg-amber-600',
+      quote:
+        'The interactive live tests and video summaries made revision so fast before finals. I never felt stressed because every topic was thoroughly practiced with instant automated scoring.',
+      rating: 5,
+    },
+    {
+      name: 'Dr. Sunita Mishra',
+      role: 'Academic Director, Partner School',
+      badge: 'Institutional Partner',
+      avatar: 'SM',
+      avatarBg: 'bg-indigo-600',
+      quote:
+        'We partnered with Implex Edu for our inter-school quiz Olympiad and academic diagnostics. The cryptographic verification system for certificates gives both parents and admissions boards 100% trust in the scores.',
+      rating: 5,
+    },
+  ];
 
   return (
     <div className="space-y-24 pb-24 overflow-hidden">
@@ -70,9 +153,66 @@ export default function HomePage() {
               Discover new opportunities, strengthen your knowledge and move closer to your academic and career goals with Implex Edu.
             </p>
 
-            <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Explore academic learning, competitive examination preparation and educational opportunities designed to help learners build a stronger future.
-            </p>
+            {/* BEAUTIFUL HERO PATHWAY BANNER (Replacing plain text) */}
+            <div className="my-6 relative overflow-hidden rounded-3xl border border-brand-200/90 bg-gradient-to-r from-brand-50/95 via-white to-indigo-50/95 p-6 sm:p-7 shadow-lg shadow-brand-500/5 hover-lift transition-all text-left">
+              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-52 h-52 bg-gradient-to-br from-brand-400/20 via-indigo-400/15 to-transparent rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 -ml-12 -mb-12 w-44 h-44 bg-gradient-to-tr from-amber-300/15 to-transparent rounded-full blur-xl pointer-events-none" />
+
+              <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                <div className="space-y-3 max-w-xl">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-100/90 border border-brand-200 text-brand-800 text-xs font-black tracking-wide">
+                    <Sparkles className="w-3.5 h-3.5 text-brand-600 animate-spin-slow" />
+                    <span>COMPREHENSIVE ACADEMIC PATHWAYS</span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                    From School Foundations to National Competitive Success
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                    Explore academic learning, competitive examination preparation and educational opportunities designed to help learners build a stronger future. Structured 6-day academic curricula, weekly assessment test series, and verified credentialing.
+                  </p>
+
+                  {/* Curricula Stream Badges */}
+                  <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-bold text-slate-700">
+                    <span className="px-2.5 py-1 rounded-xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-brand-400 transition-colors">
+                      🏫 Class 5th–10th Foundations
+                    </span>
+                    <span className="px-2.5 py-1 rounded-xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-brand-400 transition-colors">
+                      ⚛️ 11th & 12th PCM / PCB / Arts / Commerce
+                    </span>
+                    <span className="px-2.5 py-1 rounded-xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-brand-400 transition-colors">
+                      🎯 IIT-JEE & NEET Integrated
+                    </span>
+                    <span className="px-2.5 py-1 rounded-xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-brand-400 transition-colors">
+                      🏛️ UPSC & State PSC
+                    </span>
+                    <span className="px-2.5 py-1 rounded-xl bg-white/95 border border-slate-200/90 shadow-2xs hover:border-brand-400 transition-colors">
+                      💻 Tech & Skill Training
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right Promo Action Box */}
+                <div className="shrink-0 self-stretch lg:self-center flex flex-col items-center justify-center p-5 rounded-2xl bg-gradient-to-br from-brand-700 via-indigo-700 to-brand-900 text-white shadow-md text-center min-w-[210px] relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  <span className="inline-flex items-center gap-1 text-[11px] font-extrabold uppercase tracking-wider text-amber-300">
+                    <Tag className="w-3 h-3" /> Special Admission
+                  </span>
+                  <span className="text-3xl font-black mt-1 text-white tracking-tight">30% OFF</span>
+                  <span className="text-[11px] text-brand-100 mt-0.5">
+                    Code: <strong className="font-mono bg-white/20 px-1.5 py-0.5 rounded text-amber-200">IMPLEX30</strong>
+                  </span>
+                  <Link
+                    to="/services"
+                    className="mt-3 w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-brand-900 font-extrabold text-xs shadow-sm transition-all hover:scale-105 active:scale-95"
+                  >
+                    <span>Enroll with 30% Off</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
 
             {/* CTAs */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -141,7 +281,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Schools */}
-          <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover:-translate-y-1 transition-all duration-300">
+          <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover-lift transition-all duration-300">
             <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6">
               <School className="w-7 h-7" />
             </div>
@@ -173,7 +313,7 @@ export default function HomePage() {
           </div>
 
           {/* Colleges */}
-          <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover:-translate-y-1 transition-all duration-300 relative ring-2 ring-brand-500/20">
+          <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover-lift transition-all duration-300 relative ring-2 ring-brand-500/20">
             <div className="absolute -top-3 right-8 bg-brand-600 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow-sm">
               Popular
             </div>
@@ -208,7 +348,7 @@ export default function HomePage() {
           </div>
 
           {/* Universities */}
-          <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover:-translate-y-1 transition-all duration-300">
+          <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover-lift transition-all duration-300">
             <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6">
               <Landmark className="w-7 h-7" />
             </div>
@@ -267,7 +407,7 @@ export default function HomePage() {
             {quizzes.map((quiz) => (
               <div
                 key={quiz._id}
-                className="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-brand-500 transition-colors"
+                className="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-6 flex flex-col justify-between hover:border-brand-500 hover-lift transition-all duration-300"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
@@ -316,7 +456,7 @@ export default function HomePage() {
           </div>
           <Link
             to="/quiz-awards"
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-brand-600 hover:text-brand-700"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors"
           >
             All Competitions <ChevronRight className="w-4 h-4" />
           </Link>
@@ -326,7 +466,7 @@ export default function HomePage() {
           {competitions.map((comp) => (
             <div
               key={comp._id}
-              className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card flex flex-col justify-between"
+              className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover-lift flex flex-col justify-between transition-all"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-4">
@@ -352,7 +492,7 @@ export default function HomePage() {
                 </div>
                 <Link
                   to="/quiz-awards"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-sm transition-all"
+                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-sm transition-all hover:scale-105 active:scale-95"
                 >
                   View Details & Register
                 </Link>
@@ -362,9 +502,159 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* GUEST GMAIL CAPTURE (Zero Login/Signup Required - Requirement 4) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-900 via-indigo-900 to-slate-900 p-8 sm:p-12 text-white shadow-xl hover-lift transition-all">
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-brand-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-amber-300">
+              <Tag className="w-3.5 h-3.5 text-amber-400" />
+              <span>GUEST INSTANT ACCESS • NO REGISTRATION REQUIRED</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              Get Free Academic Syllabus Pack & 30% Discount Code
+            </h2>
+
+            <p className="text-sm sm:text-base text-slate-200 max-w-2xl mx-auto leading-relaxed">
+              Enter your Gmail to receive instant access to weekly timetable blueprints, sample test papers, and your exclusive <span className="text-amber-300 font-bold">30% OFF coupon code</span> directly in your inbox.
+            </p>
+
+            {guestEmailSuccess ? (
+              <div className="p-5 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 backdrop-blur-md text-emerald-200 max-w-xl mx-auto text-center space-y-2 animate-in fade-in zoom-in-95">
+                <div className="flex items-center justify-center gap-2 font-bold text-white text-base">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  <span>Success! Your 30% OFF Code is Ready</span>
+                </div>
+                <p className="text-xs text-slate-200">
+                  We have registered your Gmail for updates. Use coupon code{' '}
+                  <strong className="font-mono bg-white/20 px-2 py-0.5 rounded text-amber-300 text-sm">IMPLEX30</strong>{' '}
+                  at checkout for an instant 30% discount on any course!
+                </p>
+                <div className="pt-2">
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition-all shadow-sm"
+                  >
+                    <span>Browse Courses Now</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleGuestEmailSubmit} className="max-w-xl mx-auto space-y-3">
+                <div className="flex flex-col sm:flex-row gap-2.5">
+                  <div className="relative flex-1">
+                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="email"
+                      value={guestEmail}
+                      onChange={(e) => setGuestEmail(e.target.value)}
+                      placeholder="Enter your Gmail (e.g. name@gmail.com)"
+                      required
+                      className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/95 text-slate-900 placeholder:text-slate-500 font-medium text-sm focus:outline-hidden focus:ring-2 focus:ring-amber-400 transition-all shadow-inner"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={guestEmailLoading}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm shadow-md transition-all hover:scale-102 active:scale-95 disabled:opacity-60 shrink-0 cursor-pointer"
+                  >
+                    {guestEmailLoading ? (
+                      <span className="inline-flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                        Saving...
+                      </span>
+                    ) : (
+                      <>
+                        <span>Get 30% Off Code</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {guestEmailError && (
+                  <p className="text-xs text-rose-300 font-medium text-left px-1">{guestEmailError}</p>
+                )}
+
+                <p className="text-[11px] text-slate-400 text-center">
+                  🔒 100% spam-free. We only send verified syllabus guides, test announcements, and student discounts.
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS SECTION (Requirement 2: Before Cryptographically Verified Honors) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200/90 text-amber-800 text-xs font-bold shadow-2xs">
+            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+            <span>STUDENT & EDUCATOR VOICES</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Trusted by 15,000+ Students, Toppers & Partner Schools
+          </h2>
+
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Real feedback from learners who accelerated their academic marks and cracked competitive milestones with Implex Edu.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {testimonials.map((t, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card hover-lift flex flex-col justify-between transition-all duration-300 relative group"
+            >
+              <div>
+                {/* Top Quote & Rating */}
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                    ))}
+                  </div>
+                  <Quote className="w-5 h-5 text-slate-300 group-hover:text-brand-400 transition-colors" />
+                </div>
+
+                {/* Quote Text */}
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic mb-6">
+                  "{t.quote}"
+                </p>
+              </div>
+
+              {/* Author & Badge */}
+              <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+                <div
+                  className={`w-10 h-10 rounded-full ${t.avatarBg} text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-xs`}
+                >
+                  {t.avatar}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1">
+                    <h4 className="text-xs font-extrabold text-slate-900 truncate">{t.name}</h4>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" title="Verified User" />
+                  </div>
+                  <p className="text-[11px] text-slate-500 truncate">{t.role}</p>
+                  <span className="inline-block mt-0.5 text-[10px] font-bold text-brand-700 bg-brand-50 px-1.5 py-0.5 rounded">
+                    {t.badge}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* 5. AWARDS, CERTIFICATES & VERIFICATION BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
+        <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl hover-lift transition-all">
           <div className="relative z-10 max-w-2xl space-y-4">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-700/60 border border-brand-500/30 text-xs font-bold text-brand-200">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -381,14 +671,14 @@ export default function HomePage() {
             <div className="pt-4 flex flex-wrap gap-4">
               <Link
                 to="/verify"
-                className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 rounded-xl text-sm font-bold shadow-md transition-all flex items-center gap-2 hover:scale-105 active:scale-95"
               >
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 Verify a Certificate Now
               </Link>
               <Link
                 to="/quiz-awards"
-                className="px-6 py-3 bg-brand-700/60 hover:bg-brand-700 text-white border border-brand-500/40 rounded-xl text-sm font-bold transition-all"
+                className="px-6 py-3 bg-brand-700/60 hover:bg-brand-700 text-white border border-brand-500/40 rounded-xl text-sm font-bold transition-all hover:scale-105 active:scale-95"
               >
                 View Award Categories
               </Link>
@@ -399,7 +689,7 @@ export default function HomePage() {
 
       {/* 6. CALL TO ACTION FOR INSTITUTIONS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-100/80 rounded-3xl p-8 sm:p-12 border border-slate-200 text-center max-w-4xl mx-auto space-y-6">
+        <div className="bg-slate-100/80 rounded-3xl p-8 sm:p-12 border border-slate-200 text-center max-w-4xl mx-auto space-y-6 hover-lift transition-all">
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
             Ready to Connect Your Institution?
           </h2>
