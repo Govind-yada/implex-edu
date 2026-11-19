@@ -85,7 +85,7 @@ export default function AboutPage() {
       {/* Mission & Vision */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card hover-lift glow-card-hover transition-all duration-300">
             <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6">
               <Compass className="w-6 h-6" />
             </div>
@@ -98,7 +98,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card hover-lift glow-card-hover transition-all duration-300">
             <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
               <Target className="w-6 h-6" />
             </div>
@@ -114,7 +114,7 @@ export default function AboutPage() {
 
       {/* Educational Approach */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 overflow-hidden relative">
+        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 overflow-hidden relative hover-lift transition-all duration-300">
           <div className="max-w-3xl space-y-4">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-400">
               Pedagogical Framework
@@ -159,7 +159,7 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {objectives.map((obj, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-subtle">
+            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-subtle hover-lift transition-all duration-300">
               <span className="text-2xl font-black text-brand-600 mb-2 block">0{i + 1}</span>
               <h3 className="text-base font-bold text-slate-900 mb-2">{obj.title}</h3>
               <p className="text-xs text-slate-600 leading-relaxed">{obj.desc}</p>
@@ -179,7 +179,7 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reasons.map((r, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200/80 flex items-start gap-4">
+            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover-lift transition-all duration-300 flex items-start gap-4">
               <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
@@ -194,7 +194,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-brand-50 border border-brand-200/60 rounded-3xl p-8 text-center max-w-3xl mx-auto space-y-4">
+        <div className="bg-brand-50 border border-brand-200/60 rounded-3xl p-8 text-center max-w-3xl mx-auto space-y-4 hover-lift transition-all duration-300">
           <h3 className="text-2xl font-extrabold text-slate-900">Partner With Implex Edu</h3>
           <p className="text-sm text-slate-600">
             Learn how Implex Edu can support your school, college, or university with turnkey
@@ -202,7 +202,7 @@ export default function AboutPage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-sm transition-all"
+            className="btn-shine inline-flex items-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-sm hover:scale-105 active:scale-95 transition-all"
           >
             Contact Our Team <ArrowRight className="w-4 h-4" />
           </Link>

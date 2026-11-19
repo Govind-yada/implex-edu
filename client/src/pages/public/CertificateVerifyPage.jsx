@@ -46,7 +46,7 @@ export default function CertificateVerifyPage() {
 
           {/* Search box */}
           <form onSubmit={handleVerify} className="mt-8 max-w-xl mx-auto">
-            <div className="flex flex-col sm:flex-row gap-2 p-2 bg-white rounded-2xl border border-slate-200 shadow-card">
+            <div className="flex flex-col sm:flex-row gap-2 p-2 bg-white rounded-2xl border border-slate-200 shadow-card glow-card hover-lift-sm transition-all">
               <div className="relative flex-1">
                 <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-3" />
                 <input
@@ -60,7 +60,7 @@ export default function CertificateVerifyPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all"
+                className="btn-shine px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 {loading ? 'Verifying...' : 'Verify Credential'}
               </button>
@@ -72,11 +72,11 @@ export default function CertificateVerifyPage() {
       {/* Results / Verification Badge */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {result && (
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-emerald-200 shadow-xl relative overflow-hidden animate-in zoom-in-95">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-emerald-300 shadow-xl glow-card-hover hover-lift relative overflow-hidden animate-in zoom-in-95 duration-300 transition-all">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full pointer-events-none" />
 
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 shadow-xs animate-float">
                 <ShieldCheck className="w-7 h-7" />
               </div>
               <div>

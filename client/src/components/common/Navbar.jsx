@@ -59,8 +59,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Brand Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-accent-indigo flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform duration-200">
-              <GraduationCap className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-accent-indigo flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-brand-500/40 transition-all duration-300">
+              <GraduationCap className="w-6 h-6 group-hover:animate-float" />
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors">
@@ -80,10 +80,10 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 ${
+                  className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 ${
                     isActive
-                      ? 'text-brand-600 bg-brand-50'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                      ? 'text-brand-600 bg-brand-50 shadow-xs shadow-brand-500/10'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                   }`}
                 >
                   {link.name}
@@ -98,9 +98,9 @@ export default function Navbar() {
               <div className="relative">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2.5 p-1.5 pr-3 rounded-full border border-slate-200 bg-white hover:bg-slate-50 shadow-sm transition-colors"
+                  className="flex items-center gap-2.5 p-1.5 pr-3 rounded-full border border-slate-200 bg-white hover:bg-slate-50 shadow-sm transition-all hover:scale-102 active:scale-95"
                 >
-                  <div className="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-xs">
+                  <div className="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
                     {user.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
                   <div className="text-left text-xs">
@@ -115,7 +115,7 @@ export default function Navbar() {
                 </button>
 
                 {userDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2">
+                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                     <div className="px-4 py-2 border-b border-slate-100">
                       <p className="text-xs text-slate-400 font-medium">Signed in as</p>
                       <p className="text-sm font-bold text-slate-900 truncate">{user.email}</p>
@@ -144,15 +144,15 @@ export default function Navbar() {
               <div className="flex items-center gap-2.5">
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 hover:bg-brand-50/50 rounded-lg transition-colors"
+                  className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 hover:bg-brand-50/70 rounded-xl transition-all hover:scale-102 active:scale-95"
                 >
                   Log In
                 </Link>
                 <Link
                   to="/register"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-sm hover:shadow-md transition-all active:scale-95"
+                  className="btn-shine inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm hover:shadow-brand-500/25 transition-all hover:scale-105 active:scale-95"
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4 animate-spin-slow" />
                   Get Started
                 </Link>
               </div>
@@ -163,7 +163,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
+              className="p-2 text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-100 active:scale-95 transition-all"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -173,7 +173,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3">
+        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3 animate-in slide-in-from-top-4 fade-in duration-200">
           <nav className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link

@@ -196,7 +196,7 @@ export default function NewsletterPopup() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
+                className="btn-shine w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 hover:scale-102 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
               >
                 {loading ? 'Subscribing...' : 'Subscribe Now'}
               </button>

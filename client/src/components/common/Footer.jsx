@@ -60,27 +60,27 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   School Curriculum Hub
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Collegiate STEM Programs
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">
+                <Link to="/services" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   University Research Challenges
                 </Link>
               </li>
               <li>
-                <Link to="/quiz-awards" className="hover:text-white transition-colors">
+                <Link to="/quiz-awards" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Educational Competitions
                 </Link>
               </li>
               <li>
-                <Link to="/quiz-awards" className="hover:text-white transition-colors">
+                <Link to="/quiz-awards" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Quiz & Olympiads
                 </Link>
               </li>
@@ -94,28 +94,28 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/about" className="hover:text-white transition-colors">
+                <Link to="/about" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   About Implex Edu
                 </Link>
               </li>
               <li>
-                <Link to="/calendar" className="hover:text-white transition-colors">
+                <Link to="/calendar" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Academic Calendar
                 </Link>
               </li>
               <li>
-                <Link to="/quiz-awards" className="hover:text-white transition-colors">
+                <Link to="/quiz-awards" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Awards & Laurels
                 </Link>
               </li>
               <li>
-                <Link to="/verify" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <Link to="/verify" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   Verify Certificate
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition-colors">
+                <Link to="/contact" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Inquiries & Support
                 </Link>
               </li>
@@ -129,22 +129,22 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/login" className="hover:text-white transition-colors">
+                <Link to="/login" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Teacher Portal
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="hover:text-white transition-colors">
+                <Link to="/login" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Student Portal
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="hover:text-white transition-colors">
+                <Link to="/login" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block">
                   Associate Network
                 </Link>
               </li>
               <li>
-                <Link to="/register" className="hover:text-white transition-colors text-brand-400 font-medium">
+                <Link to="/register" className="hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block text-brand-400 font-medium">
                   Register Institution
                 </Link>
               </li>

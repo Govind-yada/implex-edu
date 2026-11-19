@@ -67,7 +67,7 @@ export default function ContactPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Details Card */}
-          <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between">
+          <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover-lift transition-all duration-300">
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-white">Contact Information</h2>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -116,7 +116,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form Card */}
-          <div className="lg:col-span-2 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card">
+          <div className="lg:col-span-2 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card hover-lift transition-all duration-300">
             <h2 className="text-2xl font-bold text-slate-900 mb-2">Send an Enquiry</h2>
             <p className="text-xs text-slate-500 mb-8">
               Complete the form below and your message will be forwarded directly to the
@@ -215,7 +215,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2"
+                  className="btn-shine w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   {submitting ? 'Submitting...' : 'Send Message'}

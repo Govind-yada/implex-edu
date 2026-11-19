@@ -43,7 +43,7 @@ export default function TopNotificationBar() {
 
             <Link
               to="/services"
-              className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-white text-brand-800 hover:bg-brand-50 font-extrabold text-xs shadow-xs transition-all hover:scale-105 active:scale-95 shrink-0"
+              className="btn-shine inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-white text-brand-800 hover:bg-brand-50 font-extrabold text-xs shadow-xs transition-all hover:scale-105 active:scale-95 shrink-0"
             >
               <span>Claim 30% Off</span>
               <ArrowRight className="w-3 h-3" />

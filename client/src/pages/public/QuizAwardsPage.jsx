@@ -121,9 +121,9 @@ export default function QuizAwardsPage() {
           <div className="mt-8 inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200">
             <button
               onClick={() => setActiveTab('quizzes')}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-95 ${
                 activeTab === 'quizzes'
-                  ? 'bg-white text-slate-900 shadow-sm'
+                  ? 'bg-white text-slate-900 shadow-md shadow-slate-200/50'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -131,9 +131,9 @@ export default function QuizAwardsPage() {
             </button>
             <button
               onClick={() => setActiveTab('competitions')}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-95 ${
                 activeTab === 'competitions'
-                  ? 'bg-white text-slate-900 shadow-sm'
+                  ? 'bg-white text-slate-900 shadow-md shadow-slate-200/50'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -141,9 +141,9 @@ export default function QuizAwardsPage() {
             </button>
             <button
               onClick={() => setActiveTab('awards')}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-95 ${
                 activeTab === 'awards'
-                  ? 'bg-white text-slate-900 shadow-sm'
+                  ? 'bg-white text-slate-900 shadow-md shadow-slate-200/50'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -205,7 +205,7 @@ export default function QuizAwardsPage() {
                       .map((quiz) => (
                         <div
                           key={quiz._id}
-                          className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card flex flex-col justify-between hover:-translate-y-1 transition-all duration-300"
+                          className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card hover-lift glow-card-hover flex flex-col justify-between transition-all duration-300"
                         >
                           <div>
                             <div className="flex items-center justify-between gap-2 mb-3">
@@ -229,7 +229,7 @@ export default function QuizAwardsPage() {
                             </div>
                             <button
                               onClick={() => handleStartQuiz(quiz._id)}
-                              className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all"
+                              className="btn-shine px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all"
                             >
                               Attempt Quiz
                             </button>
@@ -255,7 +255,7 @@ export default function QuizAwardsPage() {
                     {competitions.map((comp) => (
                       <div
                         key={comp._id}
-                        className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card flex flex-col justify-between"
+                        className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card hover-lift glow-card-hover flex flex-col justify-between transition-all duration-300"
                       >
                         <div>
                           <div className="flex items-center justify-between gap-2 mb-4">
@@ -310,14 +310,14 @@ export default function QuizAwardsPage() {
                           {isAuthenticated ? (
                             <Link
                               to="/student/competitions"
-                              className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all"
+                              className="btn-shine px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-sm hover:scale-105 active:scale-95 transition-all"
                             >
                               Register Now
                             </Link>
                           ) : (
                             <Link
                               to="/login"
-                              className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all"
+                              className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold hover:scale-105 active:scale-95 transition-all"
                             >
                               Log In to Register
                             </Link>
@@ -339,7 +339,7 @@ export default function QuizAwardsPage() {
                     return (
                       <div
                         key={idx}
-                        className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card flex flex-col justify-between"
+                        className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card hover-lift glow-card-hover flex flex-col justify-between transition-all duration-300"
                       >
                         <div>
                           <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">

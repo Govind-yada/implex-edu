@@ -51,12 +51,61 @@
 
 /* Visuals & Interactive Animations */
 .hover-lift {
-  @apply transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-500/10;
+  @apply transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/15;
+}
+
+.hover-lift-sm {
+  @apply transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-md hover:shadow-brand-500/10;
 }
 
 .glow-card {
   box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.08), 0 0 15px -3px rgba(99, 102, 241, 0.05);
 }
+
+.glow-card-hover {
+  @apply transition-all duration-300;
+}
+.glow-card-hover:hover {
+  box-shadow: 0 10px 30px -4px rgba(37, 99, 235, 0.18), 0 0 20px -2px rgba(99, 102, 241, 0.15);
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: all 0.75s ease;
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  left: 140%;
+}
+
+.active-press {
+  @apply active:scale-95 transition-transform duration-100;
+}
+
+.page-enter {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
 
 .banner-shimmer {
   background: linear-gradient(
@@ -75,6 +124,17 @@
   }
   100% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
