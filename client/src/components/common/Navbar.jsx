@@ -12,6 +12,8 @@ import {
   LayoutDashboard,
   LogOut,
   Sparkles,
+  Tag,
+  ArrowRight,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -93,8 +95,26 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Action / Auth Button */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Right Action / Auth Button & 30% OFF Promo Button */}
+          <div className="hidden md:flex items-center gap-2.5">
+            {/* 30% OFF Special Admission Button (Near Login) */}
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to="/services"
+                className="btn-shine inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 via-brand-600 to-indigo-600 text-white font-extrabold text-xs shadow-sm hover:shadow-brand-500/25 transition-all border border-amber-300/30"
+                title="Special Admission Offer: Flat 30% OFF on all courses! Code: IMPLEX30"
+              >
+                <span className="px-1.5 py-0.5 rounded-md bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wide">
+                  30% OFF
+                </span>
+                <span className="hidden lg:inline text-white font-bold">Special Offer</span>
+                <span className="font-mono text-[10px] text-amber-200 bg-black/20 px-1 py-0.5 rounded font-bold">
+                  IMPLEX30
+                </span>
+                <ArrowRight className="w-3 h-3 text-amber-200" />
+              </Link>
+            </motion.div>
+
             {isAuthenticated && user ? (
               <div className="relative">
                 <button
@@ -212,6 +232,20 @@ export default function Navbar() {
             </nav>
 
             <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+              {/* Mobile 30% OFF Special Admission Button */}
+              <Link
+                to="/services"
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn-shine flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-brand-600 to-indigo-600 text-white font-bold text-xs shadow-sm"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 rounded-md bg-amber-400 text-slate-950 font-black text-[10px]">
+                    30% OFF
+                  </span>
+                  <span>Special Admission: Use Code IMPLEX30</span>
+                </span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
               {isAuthenticated && user ? (
                 <>
                   <Link

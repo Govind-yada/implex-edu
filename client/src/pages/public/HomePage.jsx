@@ -172,37 +172,6 @@ export default function HomePage() {
               Discover new opportunities, strengthen your knowledge and move closer to your academic and career goals with Implex Edu.
             </motion.p>
 
-            {/* 30% OFF SPECIAL ADMISSION BUTTON (Replacing Pathway Banner as requested in Ref Img 2) */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="my-6 flex items-center justify-center"
-            >
-              <Link
-                to="/services"
-                className="btn-shine group relative inline-flex items-center gap-2.5 sm:gap-3.5 px-5 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-r from-brand-700 via-indigo-600 to-brand-800 text-white font-bold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 transition-all text-xs sm:text-sm cursor-pointer border border-white/20"
-              >
-                <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 text-[11px] font-black uppercase tracking-wider shadow-xs animate-pulse">
-                  <Tag className="w-3.5 h-3.5 text-slate-950" />
-                  30% OFF
-                </span>
-
-                <span className="font-extrabold text-white">
-                  Special Admission: Flat 30% OFF All Courses
-                </span>
-
-                <span className="hidden md:inline font-mono text-[11px] bg-white/15 px-2 py-0.5 rounded-md text-amber-200 font-bold">
-                  Code: IMPLEX30
-                </span>
-
-                <span className="inline-flex items-center gap-1 text-xs font-black bg-white text-brand-900 px-3 py-1.5 rounded-xl shadow-xs group-hover:bg-brand-50 transition-colors">
-                  <span>Enroll with 30% Off</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            </motion.div>
-
             {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
