@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/common/Navbar.jsx';
 import Footer from '../components/common/Footer.jsx';
 import Toast from '../components/common/Toast.jsx';
+import NewsletterPopup from '../components/common/NewsletterPopup.jsx';
 
 export default function PublicLayout() {
   return (
@@ -13,6 +14,7 @@ export default function PublicLayout() {
       </main>
       <Footer />
       <Toast />
+      <NewsletterPopup />
     </div>
   );
 }

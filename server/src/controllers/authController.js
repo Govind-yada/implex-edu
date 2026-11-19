@@ -6,6 +6,7 @@ import AssociateProfile from '../models/AssociateProfile.js';
 import Institution from '../models/Institution.js';
 import InstitutionMembership from '../models/InstitutionMembership.js';
 import PlatformSetting from '../models/PlatformSetting.js';
+import CourseEnrollment from '../models/CourseEnrollment.js';
 import { ROLES, USER_STATUS } from '../config/constants.js';
 import { sendTokenResponse } from '../utils/tokenUtils.js';
 import { sendSuccess, sendError } from '../utils/apiResponse.js';
@@ -111,6 +112,16 @@ export const register = async (req, res, next) => {
         role,
         status: 'active',
       });
+    }
+
+    // Auto-link any prior guest course enrollments matching this email
+    try {
+      await CourseEnrollment.updateMany(
+        { customerEmail: email.toLowerCase().trim(), user: null },
+        { $set: { user: user._id } }
+      );
+    } catch (enrollErr) {
+      console.warn('[Enrollment Link Warning]', enrollErr.message);
     }
 
     if (initialStatus === USER_STATUS.PENDING) {

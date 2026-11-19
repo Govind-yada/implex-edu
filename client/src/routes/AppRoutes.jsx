@@ -53,6 +53,10 @@ import AdminCertificates from '../pages/admin/AdminCertificates.jsx';
 import AdminEnquiries from '../pages/admin/AdminEnquiries.jsx';
 import AdminCMS from '../pages/admin/AdminCMS.jsx';
 import AdminSettings from '../pages/admin/AdminSettings.jsx';
+import AdminPayments from '../pages/admin/AdminPayments.jsx';
+import AdminSubscribers from '../pages/admin/AdminSubscribers.jsx';
+import PaymentCheckoutPage from '../pages/public/PaymentCheckoutPage.jsx';
+import PaymentStatusPage from '../pages/public/PaymentStatusPage.jsx';
 
 export default function AppRoutes() {
   return (
@@ -67,6 +71,8 @@ export default function AppRoutes() {
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/verify" element={<CertificateVerifyPage />} />
+        <Route path="/checkout/:courseId" element={<PaymentCheckoutPage />} />
+        <Route path="/payment/status/:orderId" element={<PaymentStatusPage />} />
 
         {/* Auth Routes */}
         <Route path="/login" element={<LoginPage />} />
@@ -139,6 +145,8 @@ export default function AppRoutes() {
         <Route path="quizzes" element={<AdminQuizzes />} />
         <Route path="competitions" element={<AdminCompetitions />} />
         <Route path="certificates" element={<AdminCertificates />} />
+        <Route path="payments" element={<AdminPayments />} />
+        <Route path="subscribers" element={<AdminSubscribers />} />
         <Route path="enquiries" element={<AdminEnquiries />} />
         <Route path="cms" element={<AdminCMS />} />
         <Route path="settings" element={<AdminSettings />} />

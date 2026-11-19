@@ -23,6 +23,8 @@ import contentRoutes from './routes/contentRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
+import subscriptionRoutes from './routes/subscriptionRoutes.js';
 
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
@@ -103,6 +105,15 @@ app.use('/api/v1/content', contentRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/notifications', notificationRoutes);
 app.use('/api/v1/courses', courseRoutes);
+app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/email-subscriptions', subscriptionRoutes);
+app.use('/api/v1/email-verification', subscriptionRoutes);
+
+// Static uploads folder for payment screenshots
+const uploadsPath = path.resolve(__dirname, '../uploads');
+const rootUploadsPath = path.resolve(__dirname, '../../uploads');
+if (fs.existsSync(uploadsPath)) app.use('/uploads', express.static(uploadsPath));
+if (fs.existsSync(rootUploadsPath)) app.use('/uploads', express.static(rootUploadsPath));
 
 // Serve static client assets in production if client/dist exists
 if (fs.existsSync(clientDistPath)) {

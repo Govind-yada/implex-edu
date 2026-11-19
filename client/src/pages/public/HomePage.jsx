@@ -59,52 +59,68 @@ export default function HomePage() {
           <div className="text-center max-w-3xl mx-auto space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-200/80 shadow-sm text-xs font-bold text-brand-700 animate-in fade-in slide-in-from-bottom-2">
               <Sparkles className="w-3.5 h-3.5 text-accent-amber" />
-              <span>IMPLEXEDU — An Educational Unit of I.C.International</span>
+              <span>IMPLEX EDU — Educational Learning Platform</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-              Excellence in <span className="text-gradient">School, Board</span> & Competitive Batches
+              Learn Today. <span className="text-gradient">Lead Tomorrow.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Govt. Registered (TAN: <strong className="text-slate-800">PTN001255C</strong> | PAN: <strong className="text-slate-800">AAJF10957N</strong>). Offering structured 6-day base classes, 11th & 12th PCM/PCB/Commerce/Arts, IIT & NEET integrated programs, and Civil Services batches.
+            <p className="text-lg sm:text-xl font-semibold text-slate-800 max-w-2xl mx-auto leading-relaxed">
+              Discover new opportunities, strengthen your knowledge and move closer to your academic and career goals with Implex Edu.
+            </p>
+
+            <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Explore academic learning, competitive examination preparation and educational opportunities designed to help learners build a stronger future.
             </p>
 
             {/* CTAs */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
               <Link
                 to="/services"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-brand-600 hover:bg-brand-700 shadow-md shadow-brand-500/25 transition-all active:scale-95"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-white bg-brand-600 hover:bg-brand-700 shadow-md shadow-brand-500/25 transition-all active:scale-95 text-sm"
               >
                 <BookOpen className="w-4 h-4" />
-                View Course Catalog & Fees
+                Explore Courses
               </Link>
               <Link
                 to="/register"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-slate-800 bg-white hover:bg-slate-100 border border-slate-200 shadow-sm transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-slate-800 bg-white hover:bg-slate-100 border border-slate-200 shadow-sm transition-all text-sm"
               >
-                Online Student Admission
+                Start Learning
                 <ArrowRight className="w-4 h-4 text-slate-400" />
               </Link>
             </div>
 
-            {/* Micro stats banner */}
+            {/* Supporting Highlights */}
             <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center">
-                <p className="text-2xl sm:text-3xl font-extrabold text-brand-600">3+</p>
-                <p className="text-xs font-semibold text-slate-500 mt-1">Institutional Tiers</p>
+              <div className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center hover:border-brand-300 transition-all">
+                <div className="w-9 h-9 mx-auto rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-2 font-bold text-base">
+                  <BookOpen className="w-4 h-4" />
+                </div>
+                <p className="text-sm font-bold text-slate-900">Academic Learning</p>
+                <p className="text-[11px] font-medium text-slate-500 mt-0.5">Foundations to Senior Secondary</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center">
-                <p className="text-2xl sm:text-3xl font-extrabold text-emerald-600">100%</p>
-                <p className="text-xs font-semibold text-slate-500 mt-1">Verified Credentials</p>
+              <div className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center hover:border-brand-300 transition-all">
+                <div className="w-9 h-9 mx-auto rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 font-bold text-base">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <p className="text-sm font-bold text-slate-900">Competitive Exam Prep</p>
+                <p className="text-[11px] font-medium text-slate-500 mt-0.5">Structured Guidance & Mock Tests</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center">
-                <p className="text-2xl sm:text-3xl font-extrabold text-accent-indigo">Auto</p>
-                <p className="text-xs font-semibold text-slate-500 mt-1">Server Grading</p>
+              <div className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center hover:border-brand-300 transition-all">
+                <div className="w-9 h-9 mx-auto rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2 font-bold text-base">
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
+                <p className="text-sm font-bold text-slate-900">Skill Development</p>
+                <p className="text-[11px] font-medium text-slate-500 mt-0.5">Tech, Coding & Communication</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center">
-                <p className="text-2xl sm:text-3xl font-extrabold text-amber-500">24/7</p>
-                <p className="text-xs font-semibold text-slate-500 mt-1">Digital Access</p>
+              <div className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/80 shadow-subtle text-center hover:border-brand-300 transition-all">
+                <div className="w-9 h-9 mx-auto rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2 font-bold text-base">
+                  <GraduationCap className="w-4 h-4" />
+                </div>
+                <p className="text-sm font-bold text-slate-900">Student Growth</p>
+                <p className="text-[11px] font-medium text-slate-500 mt-0.5">Continuous Mentorship</p>
               </div>
             </div>
           </div>

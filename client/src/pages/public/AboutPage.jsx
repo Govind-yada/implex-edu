@@ -62,7 +62,7 @@ export default function AboutPage() {
             Advancing Education Through Technology & Academic Integrity
           </h1>
           <p className="text-base sm:text-lg text-slate-600 mt-4 leading-relaxed">
-            Govt. Registered (TAN: <strong className="text-slate-800">PTN001255C</strong> | PAN: <strong className="text-slate-800">AAJF10957N</strong>). Implex Edu provides standardized 6-day academic curricula, weekly assessments, and competitive coaching for Class 5 to Postgraduates across India.
+            Implex Edu provides structured academic learning, competitive examination preparation, and educational opportunities designed to help learners build a stronger future.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600">

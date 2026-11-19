@@ -219,3 +219,9 @@ export const addMockUser = (user) => {
   mockUsers.push(newUser);
   return newUser;
 };
+
+export const mockPayments = [];
+export const mockEnrollments = [];
+export const mockSubscribers = [];
+export const mockVerifications = [];
+

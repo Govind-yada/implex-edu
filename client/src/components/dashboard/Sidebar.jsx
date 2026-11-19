@@ -20,6 +20,8 @@ import {
   BarChart3,
   X,
   User,
+  CreditCard,
+  Mail,
 } from 'lucide-react';
 
 export default function Sidebar() {
@@ -37,6 +39,8 @@ export default function Sidebar() {
           { name: 'Quizzes', path: '/admin/quizzes', icon: FileQuestion },
           { name: 'Competitions', path: '/admin/competitions', icon: Trophy },
           { name: 'Certificates', path: '/admin/certificates', icon: Award },
+          { name: 'UPI Payments', path: '/admin/payments', icon: CreditCard },
+          { name: 'Subscribers', path: '/admin/subscribers', icon: Mail },
           { name: 'Enquiries', path: '/admin/enquiries', icon: MessageSquare },
           { name: 'Website CMS', path: '/admin/cms', icon: Globe2 },
           { name: 'Settings', path: '/admin/settings', icon: Settings },

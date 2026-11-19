@@ -55,3 +55,24 @@ export const CONTACT_STATUS = {
   IN_REVIEW: 'in_review',
   RESOLVED: 'resolved',
 };
+
+export const PAYMENT_STATUS = {
+  PENDING: 'pending',
+  SUBMITTED: 'submitted',
+  UNDER_REVIEW: 'under_review',
+  VERIFIED: 'verified',
+  REJECTED: 'rejected',
+  CANCELLED: 'cancelled',
+  REFUNDED: 'refunded',
+};
+
+export const SUBSCRIPTION_STATUS = {
+  ACTIVE: 'active',
+  UNSUBSCRIBED: 'unsubscribed',
+};
+
+export const ENROLLMENT_STATUS = {
+  ACTIVE: 'active',
+  COMPLETED: 'completed',
+  REVOKED: 'revoked',
+};

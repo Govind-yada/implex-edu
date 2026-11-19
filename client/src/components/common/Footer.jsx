@@ -32,22 +32,13 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              Premier educational system providing structured 6-day academic curricula, board test series, IIT & NEET integrated programs, and government competitive batches.
+              Premier educational platform providing structured academic curricula, competitive examination preparation, and comprehensive learning opportunities.
             </p>
 
-            {/* Official Statutory Badges */}
-            <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 text-xs space-y-1.5">
-              <div className="flex items-center justify-between text-slate-300 font-mono text-[11px]">
-                <span className="text-slate-400">TAN NO:</span>
-                <span className="font-semibold text-brand-400">PTN001255C</span>
-              </div>
-              <div className="flex items-center justify-between text-slate-300 font-mono text-[11px]">
-                <span className="text-slate-400">PAN NO:</span>
-                <span className="font-semibold text-brand-400">AAJF10957N</span>
-              </div>
-              <div className="text-[10px] text-slate-500 text-right pt-0.5">
-                Valid for Academic Year 2024-25 • Authorized Admin
-              </div>
+            {/* Platform Motto */}
+            <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 text-xs space-y-1">
+              <p className="text-xs font-semibold text-brand-400">Learn Today. Lead Tomorrow.</p>
+              <p className="text-[11px] text-slate-400">Empowering learners with structured knowledge and skills.</p>
             </div>
 
             <div className="pt-1 flex flex-col gap-2 text-xs text-slate-400">
