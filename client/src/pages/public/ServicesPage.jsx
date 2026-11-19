@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { addToast } from '../../store/slices/uiSlice.js';
@@ -31,13 +31,21 @@ import Modal from '../../components/common/Modal.jsx';
 
 export default function ServicesPage() {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
 
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState(() => searchParams.get('category') || 'all');
   const [activeMedium, setActiveMedium] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('search') || '');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat) setActiveCategory(cat);
+    const q = searchParams.get('search');
+    if (q) setSearchQuery(q);
+  }, [searchParams]);
 
   const [formData, setFormData] = useState({
     name: '',

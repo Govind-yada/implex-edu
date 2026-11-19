@@ -301,8 +301,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* COMPETITIVE EXAM BANNER CAROUSEL (Requirement 4) */}
-      <ExamBannerCarousel />
+      {/* FEATURED ACADEMIC & COMPETITIVE EXAM BANNERS */}
+      <motion.section
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="space-y-4"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
+          <Badge variant="blue" className="bg-brand-50 text-brand-700 border-brand-200">
+            Admissions & Academic Batches 2026–27
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Explore Academic & Competitive Programs
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
+            Choose your preparation pathway — from foundational school curricula to premier entrance examinations like UPSC, SSC, IIT-JEE, and NEET. Click any banner to access full syllabus and batch admissions.
+          </p>
+        </div>
+
+        <ExamBannerCarousel />
+      </motion.section>
 
       {/* 2. INSTITUTIONAL TIERS (Schools, Colleges, Universities) */}
       <motion.section
