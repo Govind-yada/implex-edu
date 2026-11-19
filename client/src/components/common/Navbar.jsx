@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 import { logoutUser } from '../../store/slices/authSlice.js';
 import {
   GraduationCap,
@@ -114,47 +115,59 @@ export default function Navbar() {
                   <ChevronDown className="w-4 h-4 text-slate-400" />
                 </button>
 
-                {userDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                    <div className="px-4 py-2 border-b border-slate-100">
-                      <p className="text-xs text-slate-400 font-medium">Signed in as</p>
-                      <p className="text-sm font-bold text-slate-900 truncate">{user.email}</p>
-                    </div>
-
-                    <Link
-                      to={getDashboardPath()}
-                      onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
+                <AnimatePresence>
+                  {userDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -8 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -8 }}
+                      transition={{ duration: 0.15, ease: 'easeOut' }}
+                      className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 origin-top-right"
                     >
-                      <LayoutDashboard className="w-4 h-4" />
-                      Dashboard
-                    </Link>
+                      <div className="px-4 py-2 border-b border-slate-100">
+                        <p className="text-xs text-slate-400 font-medium">Signed in as</p>
+                        <p className="text-sm font-bold text-slate-900 truncate">{user.email}</p>
+                      </div>
 
-                    <button
-                      onClick={handleLogout}
-                      className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Sign Out
-                    </button>
-                  </div>
-                )}
+                      <Link
+                        to={getDashboardPath()}
+                        onClick={() => setUserDropdownOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
+                      >
+                        <LayoutDashboard className="w-4 h-4" />
+                        Dashboard
+                      </Link>
+
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-rose-600 hover:bg-rose-50 transition-colors text-left cursor-pointer"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
               <div className="flex items-center gap-2.5">
-                <Link
-                  to="/login"
-                  className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 hover:bg-brand-50/70 rounded-xl transition-all hover:scale-102 active:scale-95"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/register"
-                  className="btn-shine inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm hover:shadow-brand-500/25 transition-all hover:scale-105 active:scale-95"
-                >
-                  <Sparkles className="w-4 h-4 animate-spin-slow" />
-                  Get Started
-                </Link>
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    to="/login"
+                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 hover:bg-brand-50/70 rounded-xl transition-all inline-block"
+                  >
+                    Log In
+                  </Link>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    to="/register"
+                    className="btn-shine inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm hover:shadow-brand-500/25 transition-all"
+                  >
+                    <Sparkles className="w-4 h-4 animate-spin-slow" />
+                    Get Started
+                  </Link>
+                </motion.div>
               </div>
             )}
           </div>
@@ -163,7 +176,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-100 active:scale-95 transition-all"
+              className="p-2 text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-100 active:scale-95 transition-all cursor-pointer"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -172,63 +185,71 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3 animate-in slide-in-from-top-4 fade-in duration-200">
-          <nav className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold ${
-                  location.pathname === link.path
-                    ? 'text-brand-600 bg-brand-50'
-                    : 'text-slate-700 hover:bg-slate-50'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3 overflow-hidden"
+          >
+            <nav className="flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    location.pathname === link.path
+                      ? 'text-brand-600 bg-brand-50'
+                      : 'text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
 
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            {isAuthenticated && user ? (
-              <>
-                <Link
-                  to={getDashboardPath()}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 bg-brand-600 text-white font-semibold rounded-lg text-sm"
-                >
-                  Open Dashboard
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-center py-2 text-rose-600 font-semibold text-sm"
-                >
-                  Log Out
-                </button>
-              </>
-            ) : (
-              <div className="grid grid-cols-2 gap-2">
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-center py-2.5 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/register"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-center py-2.5 bg-brand-600 text-white rounded-lg text-sm font-semibold shadow-sm"
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+              {isAuthenticated && user ? (
+                <>
+                  <Link
+                    to={getDashboardPath()}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full text-center py-2.5 bg-brand-600 text-white font-semibold rounded-lg text-sm shadow-sm"
+                  >
+                    Open Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-center py-2 text-rose-600 font-semibold text-sm cursor-pointer"
+                  >
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-center py-2.5 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-center py-2.5 bg-brand-600 text-white rounded-lg text-sm font-semibold shadow-sm hover:bg-brand-700 transition-colors"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

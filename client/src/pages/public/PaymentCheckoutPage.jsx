@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 import { addToast } from '../../store/slices/uiSlice.js';
 import api from '../../api/axios.js';
 import { OFFICIAL_COURSES } from '../../data/coursesData.js';
@@ -262,176 +263,197 @@ export default function PaymentCheckoutPage() {
               </div>
             )}
 
-            {step === 1 && (
-              <form onSubmit={handleCreateOrder} className="space-y-5">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900">Step 1: Contact Details</h3>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Provide your email to receive your course access key and verification receipt. No account required.
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="student@example.com"
-                    value={customerEmail}
-                    onChange={(e) => setCustomerEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Course access instructions will be delivered directly to this address.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
-                      Full Name (Optional)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Student Name"
-                      value={customerName}
-                      onChange={(e) => setCustomerName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
-                      Phone Number (Optional)
-                    </label>
-                    <input
-                      type="tel"
-                      placeholder="+91 9876543210"
-                      value={customerPhone}
-                      onChange={(e) => setCustomerPhone(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70"
+            <AnimatePresence mode="wait">
+              {step === 1 && (
+                <motion.form
+                  key="step-1"
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 16 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  onSubmit={handleCreateOrder}
+                  className="space-y-5"
                 >
-                  {loading ? 'Generating Order...' : 'Continue to Payment QR'}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
-            )}
-
-            {step === 2 && orderData && (
-              <div className="space-y-6">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">
-                      Order ID: {orderData.orderId}
-                    </span>
-                    <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" /> Awaiting Payment
-                    </span>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900">Step 1: Contact Details</h3>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Provide your email to receive your course access key and verification receipt. No account required.
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mt-2">
-                    Step 2: Scan QR & Enter UTR Reference
-                  </h3>
-                </div>
 
-                {/* Important Instructions Box */}
-                <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 leading-relaxed space-y-1">
-                  <strong>Instructions:</strong>
-                  <p>
-                    Scan the QR code using Google Pay, PhonePe, Paytm or any supported UPI application. Verify the merchant name (<strong>{MERCHANT_NAME}</strong>) and amount (<strong>₹{orderData.amount}</strong>) before completing your payment.
-                  </p>
-                </div>
-
-                {/* QR Display Card */}
-                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 text-center space-y-4 hover-lift glow-card transition-all duration-300">
-                  <div className="relative inline-block bg-white p-3 rounded-2xl shadow-md border border-slate-100 hover:shadow-lg transition-shadow">
-                    <img
-                      src="/images/upi-payment-qr.jpg"
-                      alt="Google Pay UPI Payment QR - Implex Cart International"
-                      className="w-64 h-auto max-h-[340px] mx-auto rounded-xl object-contain shadow-xs"
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="student@example.com"
+                      value={customerEmail}
+                      onChange={(e) => setCustomerEmail(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     />
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Course access instructions will be delivered directly to this address.
+                    </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-center gap-3">
-                    <button
-                      type="button"
-                      onClick={handleCopyUpi}
-                      className="px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700 shadow-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all"
-                    >
-                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                      <span>Copy UPI ID ({MERCHANT_UPI})</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleDownloadQr}
-                      className="px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700 shadow-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>Download QR</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Payment Reference Submission Form */}
-                <form onSubmit={handleSubmitReference} className="space-y-4 pt-2">
-                  <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                      Submit Payment Confirmation
-                    </h4>
-
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
-                        UPI Transaction Reference / 12-Digit UTR *
+                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                        Full Name (Optional)
                       </label>
                       <input
                         type="text"
-                        required
-                        placeholder="e.g. 423456789012 or UPI Ref"
-                        value={utr}
-                        onChange={(e) => setUtr(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+                        placeholder="Student Name"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
-                      <p className="text-[11px] text-slate-500 mt-1">
-                        Located in your GPay / PhonePe / Paytm transaction receipt details.
-                      </p>
                     </div>
-
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
-                        Payment Screenshot (Optional Proof)
+                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                        Phone Number (Optional)
                       </label>
                       <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setScreenshotFile(e.target.files[0])}
-                        className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 cursor-pointer"
+                        type="tel"
+                        placeholder="+91 9876543210"
+                        value={customerPhone}
+                        onChange={(e) => setCustomerPhone(e.target.value)}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                       />
                     </div>
                   </div>
 
-                  {/* Anti-fraud security notice */}
-                  <div className="p-3 bg-blue-50/70 border border-blue-100 rounded-xl text-[11px] text-blue-900 leading-snug">
-                    <strong>Payment Verification Policy:</strong> Your submission will be placed in pending review. Our admissions team validates the UTR against merchant settlement records before issuing access.
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                  >
+                    {loading ? 'Generating Order...' : 'Continue to Payment QR'}
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+                </motion.form>
+              )}
+
+              {step === 2 && orderData && (
+                <motion.div
+                  key="step-2"
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -16 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="space-y-6"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-mono font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">
+                        Order ID: {orderData.orderId}
+                      </span>
+                      <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5" /> Awaiting Payment
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mt-2">
+                      Step 2: Scan QR & Enter UTR Reference
+                    </h3>
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={submittingProof}
-                    className="btn-shine w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md shadow-emerald-600/20 hover:scale-102 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
-                  >
-                    {submittingProof ? 'Submitting Details...' : 'Submit Payment Details for Verification'}
-                  </button>
-                </form>
-              </div>
-            )}
+                  {/* Important Instructions Box */}
+                  <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 leading-relaxed space-y-1">
+                    <strong>Instructions:</strong>
+                    <p>
+                      Scan the QR code using Google Pay, PhonePe, Paytm or any supported UPI application. Verify the merchant name (<strong>{MERCHANT_NAME}</strong>) and amount (<strong>₹{orderData.amount}</strong>) before completing your payment.
+                    </p>
+                  </div>
+
+                  {/* QR Display Card */}
+                  <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 text-center space-y-4 hover-lift glow-card transition-all duration-300">
+                    <div className="relative inline-block bg-white p-3 rounded-2xl shadow-md border border-slate-100 hover:shadow-lg transition-shadow">
+                      <img
+                        src="/images/upi-payment-qr.jpg"
+                        alt="Google Pay UPI Payment QR - Implex Cart International"
+                        className="w-64 h-auto max-h-[340px] mx-auto rounded-xl object-contain shadow-xs"
+                      />
+                    </div>
+
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                      <button
+                        type="button"
+                        onClick={handleCopyUpi}
+                        className="px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700 shadow-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                      >
+                        {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>Copy UPI ID ({MERCHANT_UPI})</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleDownloadQr}
+                        className="px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700 shadow-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Download QR</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Payment Reference Submission Form */}
+                  <form onSubmit={handleSubmitReference} className="space-y-4 pt-2">
+                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                      <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                        Submit Payment Confirmation
+                      </h4>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          UPI Transaction Reference / 12-Digit UTR *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. 423456789012 or UPI Ref"
+                          value={utr}
+                          onChange={(e) => setUtr(e.target.value)}
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+                        />
+                        <p className="text-[11px] text-slate-500 mt-1">
+                          Located in your GPay / PhonePe / Paytm transaction receipt details.
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Payment Screenshot (Optional Proof)
+                        </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => setScreenshotFile(e.target.files[0])}
+                          className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 cursor-pointer"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Anti-fraud security notice */}
+                    <div className="p-3 bg-blue-50/70 border border-blue-100 rounded-xl text-[11px] text-blue-900 leading-snug">
+                      <strong>Payment Verification Policy:</strong> Your submission will be placed in pending review. Our admissions team validates the UTR against merchant settlement records before issuing access.
+                    </div>
+
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      type="submit"
+                      disabled={submittingProof}
+                      className="btn-shine w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                    >
+                      {submittingProof ? 'Submitting Details...' : 'Submit Payment Details for Verification'}
+                    </motion.button>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

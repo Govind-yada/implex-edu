@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import api from '../../api/axios.js';
 import {
   Clock,
@@ -68,21 +69,41 @@ export default function PaymentStatusPage() {
 
   return (
     <div className="min-h-[85vh] py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-brand-50/40 via-white to-slate-50 flex items-center justify-center">
-      <div className="max-w-xl w-full bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+        className="max-w-xl w-full bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-card space-y-6"
+      >
         {/* Top Status Icon */}
         <div className="text-center space-y-3">
           {isVerified ? (
-            <div className="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-sm">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', damping: 14, stiffness: 220 }}
+              className="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-sm"
+            >
               <CheckCircle2 className="w-9 h-9" />
-            </div>
+            </motion.div>
           ) : isRejected ? (
-            <div className="w-16 h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center shadow-sm">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', damping: 14, stiffness: 220 }}
+              className="w-16 h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center shadow-sm"
+            >
               <XCircle className="w-9 h-9" />
-            </div>
+            </motion.div>
           ) : (
-            <div className="w-16 h-16 mx-auto rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shadow-sm animate-pulse">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="w-16 h-16 mx-auto rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shadow-sm"
+            >
               <Clock className="w-9 h-9" />
-            </div>
+            </motion.div>
           )}
 
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
@@ -185,7 +206,7 @@ export default function PaymentStatusPage() {
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 import { toggleSidebar } from '../../store/slices/uiSlice.js';
 import { logoutUser } from '../../store/slices/authSlice.js';
 import api from '../../api/axios.js';
@@ -91,58 +92,66 @@ export default function TopNav() {
           </button>
 
           {/* Notifications Dropdown */}
-          {notificationsOpen && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 z-50">
-              <div className="flex items-center justify-between px-4 pb-2 border-b border-slate-100">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-slate-900">Notifications</span>
+          <AnimatePresence>
+            {notificationsOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -6 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -6 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 z-50 origin-top-right"
+              >
+                <div className="flex items-center justify-between px-4 pb-2 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-slate-900">Notifications</span>
+                    {unreadCount > 0 && (
+                      <span className="px-2 py-0.5 text-[10px] font-bold bg-brand-50 text-brand-600 rounded-full">
+                        {unreadCount} new
+                      </span>
+                    )}
+                  </div>
                   {unreadCount > 0 && (
-                    <span className="px-2 py-0.5 text-[10px] font-bold bg-brand-50 text-brand-600 rounded-full">
-                      {unreadCount} new
-                    </span>
+                    <button
+                      onClick={handleMarkAllRead}
+                      className="text-xs text-brand-600 hover:text-brand-700 font-semibold cursor-pointer"
+                    >
+                      Mark all read
+                    </button>
                   )}
                 </div>
-                {unreadCount > 0 && (
-                  <button
-                    onClick={handleMarkAllRead}
-                    className="text-xs text-brand-600 hover:text-brand-700 font-semibold"
-                  >
-                    Mark all read
-                  </button>
-                )}
-              </div>
 
-              <div className="max-h-80 overflow-y-auto divide-y divide-slate-50">
-                {notifications.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-slate-400 font-medium">
-                    No new notifications
-                  </div>
-                ) : (
-                  notifications.map((item) => (
-                    <div
-                      key={item._id}
-                      className={`p-3.5 text-xs transition-colors hover:bg-slate-50 ${
-                        !item.isRead ? 'bg-brand-50/40' : ''
-                      }`}
-                    >
-                      <p className="font-bold text-slate-900">{item.title}</p>
-                      <p className="text-slate-600 mt-1 leading-relaxed">{item.message}</p>
-                      <span className="text-[10px] text-slate-400 mt-1 block">
-                        {new Date(item.createdAt).toLocaleDateString()}
-                      </span>
+                <div className="max-h-80 overflow-y-auto divide-y divide-slate-50">
+                  {notifications.length === 0 ? (
+                    <div className="p-6 text-center text-xs text-slate-400 font-medium">
+                      No new notifications
                     </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
+                  ) : (
+                    notifications.map((item) => (
+                      <div
+                        key={item._id}
+                        className={`p-3.5 text-xs transition-colors hover:bg-slate-50 ${
+                          !item.isRead ? 'bg-brand-50/40' : ''
+                        }`}
+                      >
+                        <p className="font-bold text-slate-900">{item.title}</p>
+                        <p className="text-slate-600 mt-1 leading-relaxed">{item.message}</p>
+                        <span className="text-[10px] text-slate-400 mt-1 block">
+                          {new Date(item.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Profile Avatar / Menu */}
         <div className="relative">
           <button
             onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-            className="flex items-center gap-2 p-1.5 rounded-full hover:bg-slate-100 transition-colors"
+            className="flex items-center gap-2 p-1.5 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <div className="w-9 h-9 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
               {user?.name?.charAt(0).toUpperCase() || 'U'}
@@ -150,24 +159,32 @@ export default function TopNav() {
             <ChevronDown className="w-4 h-4 text-slate-400 hidden sm:block" />
           </button>
 
-          {profileDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
-              <div className="px-4 py-2 border-b border-slate-100">
-                <p className="text-sm font-bold text-slate-900 truncate">{user?.name}</p>
-                <p className="text-xs text-brand-600 font-semibold uppercase">
-                  {user?.role?.replace('_', ' ')}
-                </p>
-              </div>
-
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors text-left"
+          <AnimatePresence>
+            {profileDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -6 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -6 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 origin-top-right"
               >
-                <LogOut className="w-4 h-4" />
-                Sign Out
-              </button>
-            </div>
-          )}
+                <div className="px-4 py-2 border-b border-slate-100">
+                  <p className="text-sm font-bold text-slate-900 truncate">{user?.name}</p>
+                  <p className="text-xs text-brand-600 font-semibold uppercase">
+                    {user?.role?.replace('_', ' ')}
+                  </p>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors text-left cursor-pointer"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </header>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, CheckCircle2, X, Sparkles, Bell, Tag } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import api from '../../api/axios.js';
 
 export default function NewsletterPopup() {
@@ -87,11 +88,23 @@ export default function NewsletterPopup() {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform animate-in zoom-in-95 duration-200">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.94, y: 16 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+            className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
+          >
         {/* Decorative Header Banner */}
         <div className="relative bg-gradient-to-r from-brand-700 via-brand-600 to-indigo-600 p-6 sm:p-8 text-white text-center">
           <button
@@ -193,13 +206,15 @@ export default function NewsletterPopup() {
                 </label>
               </div>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={loading}
-                className="btn-shine w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 hover:scale-102 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                className="btn-shine w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
               >
                 {loading ? 'Subscribing...' : 'Subscribe Now'}
-              </button>
+              </motion.button>
 
               <div className="text-center pt-1">
                 <button
@@ -213,7 +228,9 @@ export default function NewsletterPopup() {
             </form>
           )}
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

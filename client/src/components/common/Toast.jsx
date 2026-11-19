@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 import { removeToast } from '../../store/slices/uiSlice.js';
 import { CheckCircle2, AlertCircle, Info, AlertTriangle, X } from 'lucide-react';
 
@@ -27,8 +28,12 @@ function ToastItem({ toast, onDismiss }) {
   }, [toast.id, toast.duration, onDismiss]);
 
   return (
-    <div
-      className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-lg backdrop-blur-md transition-all duration-300 animate-slide-up ${
+    <motion.div
+      initial={{ opacity: 0, y: 16, scale: 0.94 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+      className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-lg backdrop-blur-md ${
         borders[toast.type] || borders.info
       }`}
     >
@@ -39,12 +44,12 @@ function ToastItem({ toast, onDismiss }) {
       <button
         type="button"
         onClick={() => onDismiss(toast.id)}
-        className="text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-lg hover:bg-black/5"
+        className="text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-lg hover:bg-black/5 cursor-pointer"
         title="Dismiss notification"
       >
         <X className="w-4 h-4" />
       </button>
-    </div>
+    </motion.div>
   );
 }
 
@@ -52,17 +57,18 @@ export default function Toast() {
   const dispatch = useDispatch();
   const toasts = useSelector((state) => state.ui.toasts);
 
-  if (!toasts || !toasts.length) return null;
-
   const handleDismiss = (id) => {
     dispatch(removeToast(id));
   };
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none">
-      {toasts.map((toast) => (
-        <ToastItem key={toast.id} toast={toast} onDismiss={handleDismiss} />
-      ))}
+      <AnimatePresence mode="popLayout">
+        {toasts &&
+          toasts.map((toast) => (
+            <ToastItem key={toast.id} toast={toast} onDismiss={handleDismiss} />
+          ))}
+      </AnimatePresence>
     </div>
   );
 }

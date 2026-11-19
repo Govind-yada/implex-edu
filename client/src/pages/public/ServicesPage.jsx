@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import { addToast } from '../../store/slices/uiSlice.js';
 import api from '../../api/axios.js';
 import { OFFICIAL_COURSES, IMPLEX_ORGANIZATION_INFO } from '../../data/coursesData.js';
@@ -250,7 +251,13 @@ export default function ServicesPage() {
         {/* Course Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCourses.map((course) => (
-            <div
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
               key={course.courseCode}
               className="bg-white rounded-2xl border border-slate-200/90 shadow-card hover-lift glow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:border-brand-400"
             >
@@ -344,7 +351,7 @@ export default function ServicesPage() {
                   <span>Pay via UPI QR</span>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
