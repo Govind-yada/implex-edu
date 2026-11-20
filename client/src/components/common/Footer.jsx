@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import {
   GraduationCap,
   Mail,
@@ -10,18 +9,106 @@ import {
   Award,
   Globe,
   ArrowRight,
+  BookOpen,
+  Sparkles,
+  LogIn,
+  Tag,
+  Headphones,
 } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <motion.footer
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800"
-    >
+    <footer className="bg-slate-950 text-slate-300 pt-12 pb-24 md:pb-12 border-t border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile View: 3 Important Action Buttons Inside Footer */}
+        <div className="block md:hidden mb-10 p-4 rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 shadow-xl">
+          <div className="flex items-center justify-between mb-3.5">
+            <div className="flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
+              <span className="text-xs font-black uppercase tracking-wider text-white">
+                Important Mobile Quick Links
+              </span>
+            </div>
+            <span className="text-[10px] font-bold text-amber-300 px-2 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30">
+              Top Actions
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2.5">
+            {/* Button 1: Explore Courses & Syllabus (60% OFF) */}
+            <Link
+              to="/services"
+              className="btn-shine flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-700 text-white font-black text-xs shadow-md shadow-brand-500/25 active:scale-98 transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
+                  <BookOpen className="w-4 h-4 text-white" />
+                </div>
+                <div className="text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-white text-xs truncate">Explore Courses & Syllabus</span>
+                    <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 shrink-0">
+                      60% OFF
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-brand-200 font-medium truncate mt-0.5">
+                    Bihar TRE, BPSC, UPSC, UPPSC & School
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/80 shrink-0 ml-2" />
+            </Link>
+
+            {/* Button 2: Student & Teacher Portal Login */}
+            <Link
+              to="/login"
+              className="flex items-center justify-between p-3 rounded-xl bg-slate-850 hover:bg-slate-800 text-white font-bold text-xs border border-slate-700/80 shadow-md active:scale-98 transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center shrink-0">
+                  <LogIn className="w-4 h-4 text-indigo-300" />
+                </div>
+                <div className="text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-white text-xs truncate">Student & Teacher Portal</span>
+                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 shrink-0">
+                      Login
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-400 font-medium truncate mt-0.5">
+                    Access LMS, Online Mocks & Results
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+            </Link>
+
+            {/* Button 3: Admission Support & Contact */}
+            <Link
+              to="/contact"
+              className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 text-white font-bold text-xs shadow-md shadow-emerald-500/20 active:scale-98 transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
+                  <Phone className="w-4 h-4 text-emerald-200" />
+                </div>
+                <div className="text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-white text-xs truncate">Admission Support & Queries</span>
+                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-400 text-slate-950 shrink-0">
+                      24/7 Help
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-emerald-200 font-medium truncate mt-0.5">
+                    Instant WhatsApp & Phone Assistance
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-emerald-200 shrink-0 ml-2" />
+            </Link>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
@@ -171,6 +258,44 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </motion.footer>
+
+      {/* Sticky Mobile Bottom Bar: 3 Important Action Buttons (Always pinned to bottom on mobile screens) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-lg border-t border-slate-800 shadow-[0_-4px_25px_rgba(0,0,0,0.6)] px-2.5 py-1.5">
+        <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
+          {/* Button 1: Courses (60% OFF) */}
+          <Link
+            to="/services"
+            className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-gradient-to-b from-brand-600/30 to-brand-700/20 border border-brand-500/50 text-white active:scale-95 transition-all text-center shadow-xs"
+          >
+            <div className="relative">
+              <BookOpen className="w-4 h-4 text-brand-400 mb-0.5" />
+              <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            </div>
+            <span className="text-[11px] font-black leading-tight text-white">Courses</span>
+            <span className="text-[9px] font-black text-amber-300">60% OFF</span>
+          </Link>
+
+          {/* Button 2: Student & Teacher Portal Login */}
+          <Link
+            to="/login"
+            className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-slate-900 border border-slate-700 text-white active:scale-95 transition-all text-center shadow-xs"
+          >
+            <LogIn className="w-4 h-4 text-indigo-400 mb-0.5" />
+            <span className="text-[11px] font-black leading-tight text-white">Portal</span>
+            <span className="text-[9px] font-bold text-slate-400">Login</span>
+          </Link>
+
+          {/* Button 3: Admission Helpline / Contact */}
+          <Link
+            to="/contact"
+            className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-gradient-to-b from-emerald-600/30 to-teal-700/20 border border-emerald-500/50 text-white active:scale-95 transition-all text-center shadow-xs"
+          >
+            <Phone className="w-4 h-4 text-emerald-400 mb-0.5" />
+            <span className="text-[11px] font-black leading-tight text-white">Support</span>
+            <span className="text-[9px] font-bold text-emerald-300">Helpline</span>
+          </Link>
+        </div>
+      </div>
+    </footer>
   );
 }
