@@ -10,6 +10,11 @@ import {
   Award,
   Globe,
   ArrowRight,
+  BookOpen,
+  Sparkles,
+  LogIn,
+  Tag,
+  Headphones,
 } from 'lucide-react';
 
 export default function Footer() {
@@ -22,6 +27,95 @@ export default function Footer() {
       className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile View: 3 Important Action Buttons (Highlighted prominently for mobile visitors) */}
+        <div className="block sm:hidden mb-10 p-4 rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 shadow-xl">
+          <div className="flex items-center justify-between mb-3.5">
+            <div className="flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
+              <span className="text-xs font-black uppercase tracking-wider text-white">
+                Important Quick Links
+              </span>
+            </div>
+            <span className="text-[10px] font-bold text-amber-300 px-2 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30">
+              Mobile Actions
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2.5">
+            {/* Button 1: Explore Courses & Syllabus (60% OFF) */}
+            <Link
+              to="/services"
+              className="btn-shine flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-700 text-white font-black text-xs shadow-md shadow-brand-500/25 active:scale-98 transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
+                  <BookOpen className="w-4 h-4 text-white" />
+                </div>
+                <div className="text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-white text-xs truncate">Explore Courses & Syllabus</span>
+                    <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 shrink-0">
+                      60% OFF
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-brand-200 font-medium truncate mt-0.5">
+                    Bihar TRE, BPSC, UPSC & School
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/80 shrink-0 ml-2" />
+            </Link>
+
+            {/* Button 2: Student & Teacher Portal Login */}
+            <Link
+              to="/login"
+              className="flex items-center justify-between p-3 rounded-xl bg-slate-850 hover:bg-slate-800 text-white font-bold text-xs border border-slate-700/80 shadow-md active:scale-98 transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center shrink-0">
+                  <LogIn className="w-4 h-4 text-indigo-300" />
+                </div>
+                <div className="text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-white text-xs truncate">Student & Teacher Portal</span>
+                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 shrink-0">
+                      Login
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-400 font-medium truncate mt-0.5">
+                    Access LMS, Mocks & Test Results
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+            </Link>
+
+            {/* Button 3: Admission Support & Contact */}
+            <Link
+              to="/contact"
+              className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 text-white font-bold text-xs shadow-md shadow-emerald-500/20 active:scale-98 transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
+                  <Phone className="w-4 h-4 text-emerald-200" />
+                </div>
+                <div className="text-left min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-extrabold text-white text-xs truncate">Admission Support & Queries</span>
+                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-400 text-slate-950 shrink-0">
+                      24/7 Help
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-emerald-200 font-medium truncate mt-0.5">
+                    Instant WhatsApp & Phone Assistance
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-emerald-200 shrink-0 ml-2" />
+            </Link>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
