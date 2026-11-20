@@ -18,93 +18,93 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-12 pb-24 md:pb-12 border-t border-slate-800 relative">
+    <footer className="bg-slate-950 text-slate-300 pt-10 pb-20 md:pb-12 border-t border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mobile View: 3 Important Action Buttons Inside Footer */}
-        <div className="block md:hidden mb-10 p-4 rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 shadow-xl">
-          <div className="flex items-center justify-between mb-3.5">
+        {/* Mobile View: 3 Important Action Buttons Inside Footer (Compact Size) */}
+        <div className="block md:hidden mb-6 p-3 rounded-xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 shadow-lg">
+          <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
-              <span className="text-xs font-black uppercase tracking-wider text-white">
-                Important Mobile Quick Links
+              <Sparkles className="w-3 h-3 text-amber-400 animate-spin-slow" />
+              <span className="text-[11px] font-black uppercase tracking-wider text-white">
+                Quick Action Links
               </span>
             </div>
-            <span className="text-[10px] font-bold text-amber-300 px-2 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30">
-              Top Actions
+            <span className="text-[9px] font-bold text-amber-300 px-1.5 py-0.2 rounded-full bg-amber-400/15 border border-amber-400/30">
+              Mobile Shortcuts
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-2.5">
+          <div className="grid grid-cols-1 gap-1.5">
             {/* Button 1: Explore Courses & Syllabus (60% OFF) */}
             <Link
               to="/services"
-              className="btn-shine flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-700 text-white font-black text-xs shadow-md shadow-brand-500/25 active:scale-98 transition-all"
+              className="btn-shine flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-700 text-white font-bold text-[11px] shadow-sm active:scale-98 transition-all"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
-                  <BookOpen className="w-4 h-4 text-white" />
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-7 h-7 rounded-md bg-white/20 flex items-center justify-center shrink-0">
+                  <BookOpen className="w-3.5 h-3.5 text-white" />
                 </div>
                 <div className="text-left min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-extrabold text-white text-xs truncate">Explore Courses & Syllabus</span>
-                    <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 shrink-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-extrabold text-white text-[11px] truncate">Explore Courses & Syllabus</span>
+                    <span className="text-[8px] font-black px-1 py-0.2 rounded bg-amber-400 text-slate-950 shrink-0">
                       60% OFF
                     </span>
                   </div>
-                  <p className="text-[10px] text-brand-200 font-medium truncate mt-0.5">
+                  <p className="text-[9px] text-brand-200 font-medium truncate">
                     Bihar TRE, BPSC, UPSC, UPPSC & School
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-white/80 shrink-0 ml-2" />
+              <ArrowRight className="w-3.5 h-3.5 text-white/80 shrink-0 ml-1.5" />
             </Link>
 
             {/* Button 2: Student & Teacher Portal Login */}
             <Link
               to="/login"
-              className="flex items-center justify-between p-3 rounded-xl bg-slate-850 hover:bg-slate-800 text-white font-bold text-xs border border-slate-700/80 shadow-md active:scale-98 transition-all"
+              className="flex items-center justify-between p-2 rounded-lg bg-slate-850 hover:bg-slate-800 text-white font-bold text-[11px] border border-slate-700/80 shadow-sm active:scale-98 transition-all"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center shrink-0">
-                  <LogIn className="w-4 h-4 text-indigo-300" />
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-7 h-7 rounded-md bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center shrink-0">
+                  <LogIn className="w-3.5 h-3.5 text-indigo-300" />
                 </div>
                 <div className="text-left min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-extrabold text-white text-xs truncate">Student & Teacher Portal</span>
-                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 shrink-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-extrabold text-white text-[11px] truncate">Student & Teacher Portal</span>
+                    <span className="text-[8px] font-bold px-1 py-0.2 rounded bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 shrink-0">
                       Login
                     </span>
                   </div>
-                  <p className="text-[10px] text-slate-400 font-medium truncate mt-0.5">
+                  <p className="text-[9px] text-slate-400 font-medium truncate">
                     Access LMS, Online Mocks & Results
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+              <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-1.5" />
             </Link>
 
             {/* Button 3: Admission Support & Contact */}
             <Link
               to="/contact"
-              className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 text-white font-bold text-xs shadow-md shadow-emerald-500/20 active:scale-98 transition-all"
+              className="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 text-white font-bold text-[11px] shadow-sm active:scale-98 transition-all"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
-                  <Phone className="w-4 h-4 text-emerald-200" />
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-7 h-7 rounded-md bg-white/20 flex items-center justify-center shrink-0">
+                  <Phone className="w-3.5 h-3.5 text-emerald-200" />
                 </div>
                 <div className="text-left min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-extrabold text-white text-xs truncate">Admission Support & Queries</span>
-                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-400 text-slate-950 shrink-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-extrabold text-white text-[11px] truncate">Admission Support & Queries</span>
+                    <span className="text-[8px] font-bold px-1 py-0.2 rounded bg-emerald-400 text-slate-950 shrink-0">
                       24/7 Help
                     </span>
                   </div>
-                  <p className="text-[10px] text-emerald-200 font-medium truncate mt-0.5">
+                  <p className="text-[9px] text-emerald-200 font-medium truncate">
                     Instant WhatsApp & Phone Assistance
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-emerald-200 shrink-0 ml-2" />
+              <ArrowRight className="w-3.5 h-3.5 text-emerald-200 shrink-0 ml-1.5" />
             </Link>
           </div>
         </div>
@@ -259,40 +259,40 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Sticky Mobile Bottom Bar: 3 Important Action Buttons (Always pinned to bottom on mobile screens) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-lg border-t border-slate-800 shadow-[0_-4px_25px_rgba(0,0,0,0.6)] px-2.5 py-1.5">
-        <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
+      {/* Sticky Mobile Bottom Bar: 3 Important Action Buttons (Compact Size, Always pinned to bottom on mobile screens) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] px-2 py-1">
+        <div className="grid grid-cols-3 gap-1.5 max-w-xs mx-auto">
           {/* Button 1: Courses (60% OFF) */}
           <Link
             to="/services"
-            className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-gradient-to-b from-brand-600/30 to-brand-700/20 border border-brand-500/50 text-white active:scale-95 transition-all text-center shadow-xs"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-lg bg-gradient-to-b from-brand-600/30 to-brand-700/20 border border-brand-500/40 text-white active:scale-95 transition-all text-center shadow-xs"
           >
             <div className="relative">
-              <BookOpen className="w-4 h-4 text-brand-400 mb-0.5" />
-              <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+              <BookOpen className="w-3.5 h-3.5 text-brand-400 mb-0.5" />
+              <span className="absolute -top-1 -right-1.5 w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
             </div>
-            <span className="text-[11px] font-black leading-tight text-white">Courses</span>
-            <span className="text-[9px] font-black text-amber-300">60% OFF</span>
+            <span className="text-[10px] font-bold leading-tight text-white">Courses</span>
+            <span className="text-[8px] font-extrabold text-amber-300">60% OFF</span>
           </Link>
 
           {/* Button 2: Student & Teacher Portal Login */}
           <Link
             to="/login"
-            className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-slate-900 border border-slate-700 text-white active:scale-95 transition-all text-center shadow-xs"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-lg bg-slate-900 border border-slate-700 text-white active:scale-95 transition-all text-center shadow-xs"
           >
-            <LogIn className="w-4 h-4 text-indigo-400 mb-0.5" />
-            <span className="text-[11px] font-black leading-tight text-white">Portal</span>
-            <span className="text-[9px] font-bold text-slate-400">Login</span>
+            <LogIn className="w-3.5 h-3.5 text-indigo-400 mb-0.5" />
+            <span className="text-[10px] font-bold leading-tight text-white">Portal</span>
+            <span className="text-[8px] font-semibold text-slate-400">Login</span>
           </Link>
 
           {/* Button 3: Admission Helpline / Contact */}
           <Link
             to="/contact"
-            className="flex flex-col items-center justify-center py-1.5 px-1 rounded-xl bg-gradient-to-b from-emerald-600/30 to-teal-700/20 border border-emerald-500/50 text-white active:scale-95 transition-all text-center shadow-xs"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-lg bg-gradient-to-b from-emerald-600/30 to-teal-700/20 border border-emerald-500/40 text-white active:scale-95 transition-all text-center shadow-xs"
           >
-            <Phone className="w-4 h-4 text-emerald-400 mb-0.5" />
-            <span className="text-[11px] font-black leading-tight text-white">Support</span>
-            <span className="text-[9px] font-bold text-emerald-300">Helpline</span>
+            <Phone className="w-3.5 h-3.5 text-emerald-400 mb-0.5" />
+            <span className="text-[10px] font-bold leading-tight text-white">Support</span>
+            <span className="text-[8px] font-semibold text-emerald-300">Helpline</span>
           </Link>
         </div>
       </div>
