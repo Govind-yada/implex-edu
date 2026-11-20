@@ -92,7 +92,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="space-y-16 sm:space-y-20 lg:space-y-24 pb-16 sm:pb-24 overflow-hidden">
+    <div className="space-y-16 sm:space-y-20 lg:space-y-24 pb-16 sm:pb-24 overflow-x-clip">
       {/* 1. HERO SECTION */}
       <section className="relative pt-6 sm:pt-12 pb-12 sm:pb-20 lg:pt-20 lg:pb-32 bg-gradient-to-b from-brand-50/70 via-white to-slate-50">
         {/* Decorative background ambient glows */}

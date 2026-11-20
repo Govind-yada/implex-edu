@@ -259,6 +259,7 @@ export default function ExamBannerCarousel() {
   const timerRef = useRef(null);
   const touchStartX = useRef(null);
   const pillRefs = useRef([]);
+  const pillsContainerRef = useRef(null);
   const navigate = useNavigate();
 
   const slideCount = bannerSlides.length;
@@ -276,13 +277,19 @@ export default function ExamBannerCarousel() {
     };
   }, [slideCount, currentIndex]);
 
-  // 2. Auto-scroll category pills bar so the active pill stays centered
+  // 2. Auto-scroll category pills bar so the active pill stays centered within its container
+  // (Uses container.scrollTo instead of window-level scrollIntoView to prevent disrupting home page vertical scroll)
   useEffect(() => {
-    if (pillRefs.current[currentIndex]) {
-      pillRefs.current[currentIndex].scrollIntoView({
+    const pill = pillRefs.current[currentIndex];
+    const container = pillsContainerRef.current;
+    if (pill && container) {
+      const pillLeft = pill.offsetLeft;
+      const pillWidth = pill.offsetWidth;
+      const containerWidth = container.offsetWidth;
+      const targetScroll = pillLeft - (containerWidth / 2) + (pillWidth / 2);
+      container.scrollTo({
+        left: targetScroll,
         behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
       });
     }
   }, [currentIndex]);
@@ -373,8 +380,11 @@ export default function ExamBannerCarousel() {
       className="relative w-full max-w-4xl mx-auto px-5 sm:px-6 md:px-8 select-none"
       aria-label="Competitive Exam Programs Carousel"
     >
-      {/* Category Pills Navigation (Auto-scrolls with the active category) */}
-      <div className="mb-2.5 flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-1 scrollbar-none px-1 scroll-smooth">
+      {/* Category Pills Navigation (Auto-scrolls with the active category inside its container) */}
+      <div
+        ref={pillsContainerRef}
+        className="mb-2.5 flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-1 scrollbar-none px-1 scroll-smooth"
+      >
         {bannerSlides.map((slide, idx) => {
           const isActive = idx === currentIndex;
           return (
