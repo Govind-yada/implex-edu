@@ -144,67 +144,162 @@ export default function HomePage() {
               <ExamBannerCarousel />
             </motion.div>
 
-            {/* CTAs */}
+            {/* CTAs (Enhanced with Rich Visuals & Smooth Micro-Animations) */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 px-3"
+              className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-3"
             >
-              <Link
-                to="/services"
-                className="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 shadow-md shadow-brand-500/25 transition-all hover:scale-105 active:scale-95 text-xs sm:text-sm cursor-pointer"
+              {/* Button 1: Explore Courses & Syllabus */}
+              <motion.div
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                className="w-full sm:w-auto"
               >
-                <BookOpen className="w-4 h-4" />
-                <span>Explore Courses & Syllabus</span>
-              </Link>
-              <Link
-                to="/register"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200/90 shadow-xs transition-all hover:scale-105 active:scale-95 text-xs sm:text-sm cursor-pointer hover:border-slate-300"
+                <Link
+                  to="/services"
+                  className="btn-shine group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-white bg-gradient-to-r from-blue-600 via-brand-600 to-indigo-600 hover:from-blue-700 hover:via-brand-700 hover:to-indigo-700 shadow-[0_10px_25px_-5px_rgba(37,99,235,0.4),0_0_20px_-3px_rgba(99,102,241,0.25)] hover:shadow-[0_16px_35px_-4px_rgba(37,99,235,0.55),0_0_30px_-2px_rgba(99,102,241,0.4)] border border-white/20 transition-all duration-300 text-xs sm:text-sm cursor-pointer"
+                >
+                  <div className="w-7 h-7 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-white/30 transition-all duration-300 shadow-inner">
+                    <BookOpen className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="font-extrabold tracking-tight">Explore Courses & Syllabus</span>
+                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-amber-400 text-slate-950 font-black text-[9px] uppercase tracking-wider shadow-xs group-hover:scale-105 transition-transform">
+                    60% OFF
+                  </span>
+                </Link>
+              </motion.div>
+
+              {/* Button 2: Start Learning Free */}
+              <motion.div
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                className="w-full sm:w-auto"
               >
-                <span>Start Learning Free</span>
-                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
+                <Link
+                  to="/register"
+                  className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-slate-800 bg-white/95 hover:bg-white border-2 border-slate-200/90 hover:border-brand-500 shadow-[0_4px_16px_-2px_rgba(15,23,42,0.06)] hover:shadow-[0_10px_25px_-5px_rgba(37,99,235,0.18)] transition-all duration-300 text-xs sm:text-sm cursor-pointer"
+                >
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[10px] font-black uppercase tracking-wider">
+                    <span className="flex h-1.5 w-1.5 relative shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    <span>FREE</span>
+                  </div>
+                  <span className="font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors">Start Learning Free</span>
+                  <div className="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shrink-0">
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
+                  </div>
+                </Link>
+              </motion.div>
             </motion.div>
 
-            {/* Supporting Highlights (Mobile Optimized 2x2 Grid) */}
+            {/* Supporting Highlights (4 Cards - Enhanced UI with Ambient Glows, Duotone Badges & Smooth Lift) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="pt-6 sm:pt-10 grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 max-w-4xl mx-auto"
+              className="pt-6 sm:pt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto"
             >
-              <div className="group bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.04)] text-center hover-lift hover:border-brand-300 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 mx-auto rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-2 font-bold text-sm shadow-2xs group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
-                  <BookOpen className="w-4 h-4" />
-                </div>
-                <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Academic Learning</p>
-                <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 mt-0.5">5th to Senior Secondary</p>
-              </div>
+              {/* Card 1: Academic Learning */}
+              <motion.div
+                whileHover={{ y: -6, scale: 1.025 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(37,99,235,0.08)] hover:shadow-[0_14px_30px_-6px_rgba(37,99,235,0.22)] hover:border-brand-400/80 text-center transition-all duration-300 group cursor-default"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-brand-500 to-indigo-500 opacity-90 group-hover:h-1.5 transition-all duration-300" />
+                <div className="absolute -top-8 -right-8 w-20 h-20 rounded-full bg-brand-500/10 blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
-              <div className="group bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.04)] text-center hover-lift hover:border-emerald-300 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 mx-auto rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 font-bold text-sm shadow-2xs group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                  <Sparkles className="w-4 h-4" />
+                <div className="relative mx-auto mb-2.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-brand-500/25 ring-4 ring-brand-50/80 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-brand-500/40 transition-all duration-300">
+                  <BookOpen className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">Competitive Prep</p>
-                <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 mt-0.5">UPSC, SSC, IIT & NEET</p>
-              </div>
+                <span className="inline-block px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-200/70 mb-1.5">
+                  Class 5th–12th
+                </span>
+                <p className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-brand-600 transition-colors leading-tight">
+                  Academic Learning
+                </p>
+                <p className="text-[10px] sm:text-[11px] font-semibold text-slate-500 mt-1 leading-tight">
+                  5th to Senior Secondary
+                </p>
+              </motion.div>
 
-              <div className="group bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.04)] text-center hover-lift hover:border-indigo-300 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 mx-auto rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2 font-bold text-sm shadow-2xs group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                  <CheckCircle2 className="w-4 h-4" />
-                </div>
-                <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Skill Development</p>
-                <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 mt-0.5">Full-Stack, Python & AI</p>
-              </div>
+              {/* Card 2: Competitive Prep */}
+              <motion.div
+                whileHover={{ y: -6, scale: 1.025 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(16,185,129,0.08)] hover:shadow-[0_14px_30px_-6px_rgba(16,185,129,0.22)] hover:border-emerald-400/80 text-center transition-all duration-300 group cursor-default"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 opacity-90 group-hover:h-1.5 transition-all duration-300" />
+                <div className="absolute -top-8 -right-8 w-20 h-20 rounded-full bg-emerald-500/10 blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
 
-              <div className="group bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.04)] text-center hover-lift hover:border-amber-300 transition-all duration-300">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 mx-auto rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2 font-bold text-sm shadow-2xs group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
-                  <GraduationCap className="w-4 h-4" />
+                <div className="relative mx-auto mb-2.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/25 ring-4 ring-emerald-50/80 group-hover:scale-110 group-hover:-rotate-3 group-hover:shadow-emerald-500/40 transition-all duration-300">
+                  <Sparkles className="w-5 h-5 text-white animate-spin-slow" />
                 </div>
-                <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-amber-600 transition-colors">Verified Honors</p>
-                <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 mt-0.5">Tamper-Proof Certs</p>
-              </div>
+                <span className="inline-block px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200/70 mb-1.5">
+                  National Exams
+                </span>
+                <p className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-emerald-600 transition-colors leading-tight">
+                  Competitive Prep
+                </p>
+                <p className="text-[10px] sm:text-[11px] font-semibold text-slate-500 mt-1 leading-tight">
+                  UPSC, SSC, IIT & NEET
+                </p>
+              </motion.div>
+
+              {/* Card 3: Skill Development */}
+              <motion.div
+                whileHover={{ y: -6, scale: 1.025 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(99,102,241,0.08)] hover:shadow-[0_14px_30px_-6px_rgba(99,102,241,0.22)] hover:border-indigo-400/80 text-center transition-all duration-300 group cursor-default"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 opacity-90 group-hover:h-1.5 transition-all duration-300" />
+                <div className="absolute -top-8 -right-8 w-20 h-20 rounded-full bg-indigo-500/10 blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                <div className="relative mx-auto mb-2.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/25 ring-4 ring-indigo-50/80 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-indigo-500/40 transition-all duration-300">
+                  <BrainCircuit className="w-5 h-5 text-white" />
+                </div>
+                <span className="inline-block px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-indigo-50 text-indigo-700 border border-indigo-200/70 mb-1.5">
+                  Future Ready
+                </span>
+                <p className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors leading-tight">
+                  Skill Development
+                </p>
+                <p className="text-[10px] sm:text-[11px] font-semibold text-slate-500 mt-1 leading-tight">
+                  Full-Stack, Python & AI
+                </p>
+              </motion.div>
+
+              {/* Card 4: Verified Honors */}
+              <motion.div
+                whileHover={{ y: -6, scale: 1.025 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="relative overflow-hidden bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(245,158,11,0.08)] hover:shadow-[0_14px_30px_-6px_rgba(245,158,11,0.22)] hover:border-amber-400/80 text-center transition-all duration-300 group cursor-default"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 opacity-90 group-hover:h-1.5 transition-all duration-300" />
+                <div className="absolute -top-8 -right-8 w-20 h-20 rounded-full bg-amber-500/10 blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+
+                <div className="relative mx-auto mb-2.5 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-rose-500 text-white flex items-center justify-center shadow-md shadow-amber-500/25 ring-4 ring-amber-50/80 group-hover:scale-110 group-hover:-rotate-3 group-hover:shadow-amber-500/40 transition-all duration-300">
+                  <GraduationCap className="w-5 h-5 text-white" />
+                </div>
+                <span className="inline-block px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-amber-50 text-amber-800 border border-amber-200/70 mb-1.5">
+                  ISO / QR Verified
+                </span>
+                <p className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-amber-600 transition-colors leading-tight">
+                  Verified Honors
+                </p>
+                <p className="text-[10px] sm:text-[11px] font-semibold text-slate-500 mt-1 leading-tight">
+                  Tamper-Proof Certs
+                </p>
+              </motion.div>
             </motion.div>
           </div>
         </div>
