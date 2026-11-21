@@ -258,109 +258,122 @@ export default function ServicesPage() {
 
         {/* Course Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCourses.map((course) => (
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              key={course.courseCode}
-              className="bg-white rounded-2xl border border-slate-200/90 shadow-card hover-lift glow-card-hover transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:border-brand-400"
-            >
-              {/* Card Header */}
-              <div className="p-6 space-y-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1">
-                    <span className="inline-block px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-mono font-medium">
-                      {course.listCategory} • {course.courseCode}
-                    </span>
-                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors leading-snug">
-                      {course.title}
-                    </h3>
+          {filteredCourses.map((course) => {
+            const isCompetitive = course.category === 'competitive';
+            const isIntegrated = course.category === 'integrated';
+            const isTech = course.category === 'tech_skills';
+            const accentBorder = isCompetitive
+              ? 'border-t-4 border-t-amber-500'
+              : isIntegrated
+              ? 'border-t-4 border-t-rose-500'
+              : isTech
+              ? 'border-t-4 border-t-indigo-500'
+              : 'border-t-4 border-t-brand-600';
+
+            return (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                key={course.courseCode}
+                className={`bg-white rounded-3xl border border-slate-200/90 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.06)] hover-lift transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:border-brand-400 hover:shadow-xl ${accentBorder}`}
+              >
+                {/* Card Header & Content */}
+                <div className="p-6 space-y-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="space-y-1">
+                      <span className="inline-block px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-mono font-bold">
+                        {course.listCategory} • {course.courseCode}
+                      </span>
+                      <h3 className="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors leading-snug">
+                        {course.title}
+                      </h3>
+                    </div>
+                    <Badge variant={course.medium === 'Hindi' ? 'warning' : 'info'}>
+                      {course.medium}
+                    </Badge>
                   </div>
-                  <Badge variant={course.medium === 'Hindi' ? 'warning' : 'info'}>
-                    {course.medium}
-                  </Badge>
-                </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                  {course.description}
-                </p>
+                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                    {course.description}
+                  </p>
 
-                {/* Price Display */}
-                <div className="p-3.5 bg-gradient-to-r from-brand-50 to-indigo-50/40 rounded-xl border border-brand-100 flex items-center justify-between">
-                  <div>
-                    <span className="text-[11px] uppercase font-semibold text-brand-600 tracking-wider">
-                      Subscription Fee
-                    </span>
-                    <div className="text-2xl font-black text-slate-900">
-                      ₹{course.price.toLocaleString('en-IN')}
+                  {/* Price Display */}
+                  <div className="p-4 bg-gradient-to-r from-brand-50/80 via-indigo-50/40 to-slate-50 rounded-2xl border border-brand-100/80 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-brand-700 tracking-wider">
+                        Subscription Fee
+                      </span>
+                      <div className="text-2xl font-black text-slate-900 tracking-tight">
+                        ₹{course.price.toLocaleString('en-IN')}
+                      </div>
+                    </div>
+                    <div className="text-right text-[11px] text-slate-600">
+                      <div className="font-bold text-slate-800">{course.duration}</div>
+                      <div className="text-[10px] text-slate-500 font-medium">{course.classDaysPerWeek} Days / Week</div>
                     </div>
                   </div>
-                  <div className="text-right text-[11px] text-slate-500">
-                    <div className="font-semibold text-slate-700">{course.duration}</div>
-                    <div>{course.classDaysPerWeek} Days / Week</div>
+
+                  {/* Course Specifications Matrix */}
+                  <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600 pt-1">
+                    <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                      <Clock className="w-3.5 h-3.5 text-brand-600 shrink-0" />
+                      <span className="truncate">Duration: <strong>{course.classDurationMinutes}m</strong></span>
+                    </div>
+                    <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                      <Calendar className="w-3.5 h-3.5 text-brand-600 shrink-0" />
+                      <span className="truncate">Daily: <strong>{course.classesPerDay} Classes</strong></span>
+                    </div>
+                    <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Weekly Tests</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Study Notes</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Doubt Clearing</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span>Verified Cert</span>
+                    </div>
                   </div>
+
+                  {/* Extension Tag if available */}
+                  {course.syllabusExtension && (
+                    <div className="p-2.5 bg-amber-50/80 rounded-xl border border-amber-200/80 text-[11px] text-amber-900 leading-snug">
+                      <strong className="font-bold">Extension:</strong> {course.syllabusExtension}
+                    </div>
+                  )}
                 </div>
 
-                {/* Course Specifications Matrix */}
-                <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600 pt-1">
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-brand-500" />
-                    <span>Duration: <strong>{course.classDurationMinutes} Mins</strong></span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-brand-500" />
-                    <span>Daily: <strong>{course.classesPerDay} Classes</strong></span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                    <span>Weekly Test: <strong>Yes</strong></span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                    <span>Class Notes: <strong>Yes</strong></span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                    <span>Revision: <strong>Yes</strong></span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                    <span>Recognition: <strong>Yes</strong></span>
-                  </div>
+                {/* Card Footer Action */}
+                <div className="p-4 bg-slate-50/90 border-t border-slate-100 flex items-center justify-between gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => handleOpenEnquiry(course)}
+                    className="flex-1 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-bold shadow-2xs transition-all hover:scale-102 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-slate-500" />
+                    <span>Enquire</span>
+                  </button>
+                  <Link
+                    to={`/checkout/${course.courseCode}`}
+                    className="btn-shine flex-1 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white text-xs font-bold shadow-xs hover:shadow-brand-500/25 transition-all hover:scale-102 active:scale-95 flex items-center justify-center gap-1.5"
+                  >
+                    <QrCode className="w-3.5 h-3.5 text-white" />
+                    <span>Pay via UPI</span>
+                  </Link>
                 </div>
-
-                {/* Extension Tag if available */}
-                {course.syllabusExtension && (
-                  <div className="p-2.5 bg-amber-50 rounded-lg border border-amber-200 text-[11px] text-amber-900 leading-snug">
-                    <strong className="font-semibold">Extension:</strong> {course.syllabusExtension}
-                  </div>
-                )}
-              </div>
-
-              {/* Card Footer Action */}
-              <div className="p-4 bg-slate-50 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleOpenEnquiry(course)}
-                  className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-semibold shadow-xs transition-all hover:scale-102 active:scale-95 flex items-center gap-1.5"
-                >
-                  <Mail className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Enquire</span>
-                </button>
-                <Link
-                  to={`/checkout/${course.courseCode}`}
-                  className="btn-shine px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-xs hover:shadow-brand-500/25 transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
-                >
-                  <QrCode className="w-3.5 h-3.5" />
-                  <span>Pay via UPI QR</span>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Institutional Tie-Up Services */}

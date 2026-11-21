@@ -29,29 +29,41 @@
 
 /* Glassmorphism effects */
 .glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .glass-dark {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-premium {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
 }
 
 /* Gradient text */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-brand-700 to-accent-indigo;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-brand-700 to-indigo-600;
 }
 
 .text-gradient-amber {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-rose-500;
 }
 
+.text-gradient-royal {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-900 to-indigo-900;
+}
+
 /* Visuals & Interactive Animations */
 .hover-lift {
-  @apply transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/15;
+  @apply transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-500/10;
 }
 
 .hover-lift-sm {
@@ -59,14 +71,18 @@
 }
 
 .glow-card {
-  box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.08), 0 0 15px -3px rgba(99, 102, 241, 0.05);
+  box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.06), 0 0 15px -3px rgba(99, 102, 241, 0.04);
 }
 
 .glow-card-hover {
   @apply transition-all duration-300;
 }
 .glow-card-hover:hover {
-  box-shadow: 0 10px 30px -4px rgba(37, 99, 235, 0.18), 0 0 20px -2px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 12px 30px -4px rgba(37, 99, 235, 0.15), 0 0 20px -2px rgba(99, 102, 241, 0.10);
+}
+
+.card-edtech {
+  @apply bg-white rounded-2xl border border-slate-200/80 shadow-sm transition-all duration-300 hover:border-brand-300 hover:shadow-md hover:-translate-y-1;
 }
 
 .btn-shine {
